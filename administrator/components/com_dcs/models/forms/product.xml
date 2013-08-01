@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<!-- $Id: product.xml 18212 2010-07-22 06:02:54Z eddieajau $ -->
+<form>
+	<fieldset name="details"
+		addfieldpath="/administrator/components/com_je_product/models/fields"
+	>
+		<field name="id" type="text" default="0" required="true"
+			readonly="true" class="readonly"
+			label="JGLOBAL_FIELD_ID_LABEL" 	description ="JGLOBAL_FIELD_ID_DESC" />
+			
+		<field name="name" type="text" class="inputbox"
+			size="40" label="Title" required="true" />
+
+		<field name="alias" type="text" class="inputbox"
+			size="40" label="JFIELD_ALIAS_LABEL" description="Alias" />
+			
+		<field name="price" type="text" class="inputbox"
+			size="40" label="Price" />
+			
+		<field name="promotion_price" type="text" class="inputbox"
+			size="40" label="Promotion Price" />
+			
+		<field name="address" type="textarea"
+			rows="2" cols="20" filter="raw" required="true"
+			label="Address" />
+			
+		<field name="note" type="textarea"
+			rows="2" cols="20" filter="raw"
+			label="Note" />
+			
+		<field name="product_info" type="info" class="inputbox"
+			size="1" label="Info" required="true" />
+
+		<field name="catid" type="category" extension="com_dcs"
+			label="Category" description="Category"
+			class="inputbox" required="true"
+		>
+			<option value="">- Select Category -</option>
+		</field>
+		
+		<field name="publish_up" type="calendar"
+			label="Publish up"
+			class="inputbox" format="%Y-%m-%d" size="22"
+			filter="user_utc" />
+
+		<field name="publish_down" type="calendar"
+			label="Publish down"
+			class="inputbox" format="%Y-%m-%d" size="22"
+			filter="user_utc" />
+
+		<field name="ordering" type="ordering" class="inputbox"
+			label="JFIELD_ORDERING_LABEL" description="JFIELD_ORDERING_DESC" />
+
+
+		<field name="description" type="editor" class="inputbox"
+			rows="3" cols="30" label="Description" 
+			filter="safehtml" />
+			
+		<field name="images"
+			type="upload"
+			label="Image"
+			class="inputbox"
+			size="30"
+		/>
+		
+		<field name="thumb_images"
+			type="file"
+			label="Thumb image"
+			class="inputbox"
+			size="30"
+		/>
+		
+		<field name="old_images" type="hidden" class="inputbox" />
+		<field name="old_thumb_images" type="hidden" class="inputbox" />
+		
+		<field name="delete_image" type="checkbox" class="inputbox" default="0" value="1"
+			label="Delete Image" />
+		
+		<field name="metadesc" type="textarea"
+			rows="3" cols="20" filter="raw"
+			label="Meta Description" description="Meta Description" />
+			
+		<field name="metakey" type="textarea"
+			rows="3" cols="20" filter="raw"
+			label="Keywords" description="Keywords" />
+
+	</fieldset>
+
+	<fieldset name="publish"
+			label="Publish"
+		>
+			
+		<field name="state" type="list"
+			label="JSTATUS" description="COM_JE_PRODUCT_FIELD_STATE_DESC"
+			class="inputbox" size="1" default="1" >
+			<option value="1">JPUBLISHED</option>
+			<option value="0">JUNPUBLISHED</option>
+			<option value="2">JARCHIVED</option>
+			<option value="-2">JTRASH</option>
+		</field>
+
+		<field name="created" type="calendar"
+			label="Created" description="Created Description"
+			class="inputbox" size="20" format="%Y-%m-%d %H:%M:%S"
+			filter="user_utc" />
+
+	</fieldset>
+
+</form>

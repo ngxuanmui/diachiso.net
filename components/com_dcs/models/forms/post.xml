@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="post" addfieldpath="administrator/components/com_je_product/models/fields" label="Thông tin">
+		<field name="name"
+			type="text"
+			id="name"
+			size="30"
+			label="Tiêu đề"
+			filter="string"
+			required="true"
+		/>
+		
+		<field name="catid" type="category" extension="com_je_product"
+			label="JCATEGORY" class="inputbox" required="true"
+		>
+			<option value="">- Lựa chọn Danh mục -</option>
+		</field>
+		
+		<field name="product_location" type="location" class="inputbox"
+			size="1" label="Tỉnh / Thành" required="true" />
+		
+		<field name="location" type="defaultlocation" class="inputbox"
+			size="1" label="Tỉnh / Thành mặc định" required="true" />
+			
+		<field name="images"
+			type="upload"
+			label="Ảnh"
+			class="inputbox"
+			size="30"
+		/>
+		
+		<field name="publish_up" type="calendar"
+				label="Ngày bắt đầu"
+				class="inputbox" format="%Y-%m-%d" size="10"
+				filter="user_utc" required="true" />
+	
+		<field name="publish_down" type="calendar"
+			label="Ngày kết thúc"
+			class="inputbox" format="%Y-%m-%d" size="10"
+			filter="user_utc" required="true" />
+		
+		<field name="description"
+			type="editor"
+			id="message"
+			label="Thông tin"
+			filter="htmlsafe"
+			required="true"
+			buttons="false"
+		/>
+	</fieldset>
+	
+	<fieldset name="contact" label="Liên hệ">
+		<field name="email" type="email" class="inputbox"
+			size="20" label="Email" required="true" validate="email" />
+	</fieldset>
+	<!-- 
+	<field name="scode" type="text" class="inputbox" size="15" label="Mã xác nhận" required="true" />
+	 -->
+</form>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<!-- $Id: dcss.xml 20196 2011-01-09 02:40:25Z ian $ -->
+<extension type="component" version="1.6.0" method="upgrade">
+	<name>com_dcs</name>
+	<author>muinx</author>
+	<creationDate>Jul 2013</creationDate>
+	<copyright>(C) diachiso.net</copyright>
+	<license>GNU General Public License version 2 or later; see
+		LICENSE.txt</license>
+	<authorEmail>nguyenxuanmui@gmail.com</authorEmail>
+	<authorUrl>diachiso.net</authorUrl>
+	<version>1.0.0</version>
+	<description>Digital address manager</description>
+
+	<files folder="site">
+		<filename>dcs.php</filename>
+		<filename>controller.php</filename>
+		<filename>index.html</filename>
+		<filename>router.php</filename>
+		<folder>controllers</folder>
+		<folder>helpers</folder>
+		<folder>models</folder>
+		<folder>views</folder>
+	</files>
+	<administration>
+		<menu>com_dcs</menu>
+		<files folder="admin">
+			<filename>access.xml</filename>
+			<filename>dcs.php</filename>
+			<filename>config.xml</filename>
+			<filename>controller.php</filename>
+			<filename>index.html</filename>
+			<folder>controllers</folder>
+			<folder>helpers</folder>
+			<folder>models</folder>
+			<folder>tables</folder>
+			<folder>views</folder>
+		</files>
+		<languages folder="admin">
+			<language tag="en-GB">language/en-GB.com_dcs.ini
+			</language>
+			<language tag="en-GB">language/en-GB.com_dcs.sys.ini
+			</language>
+		</languages>
+	</administration>
+</extension>
+
