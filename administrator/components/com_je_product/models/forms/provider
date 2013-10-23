@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<!-- $Id: banner.xml 20085 2011-01-05 02:42:55Z eddieajau $ -->
+<form>
+	<fieldset name="details"
+		addfieldpath="/administrator/components/com_je_product/models/fields"
+	>
+		<field name="id" type="text" default="0" 
+			readonly="true" class="readonly"
+			label="JGLOBAL_FIELD_ID_LABEL" 	description ="JGLOBAL_FIELD_ID_DESC" />
+
+		<field name="name" type="text" class="inputbox"
+			size="40" label="Name" required="true" />
+			
+		<field name="alias" type="text" class="inputbox"
+			size="40" label="JFIELD_ALIAS_LABEL" />
+			
+		<field name="customcategory"
+			type="customcategory"
+			action="check"
+			extension="com_je_product"
+			label="JCATEGORY"
+			description="JFIELD_CATEGORY_DESC"
+			class="inputbox"
+		/>
+			
+		<field name="national_id" type="category" extension="com_je_product.national"
+			label="National"
+			class="inputbox" required="true"
+		>
+			<option value="">- Select National -</option>
+		</field>
+		
+		<field name="postcode" type="text" class="inputbox" size="40" label="Postcode" />
+		
+		<field name="gmap_intergrate" type="checkbox" value="1" class="inputbox" size="40" label="Gmap intergration" />
+		
+		<field name="gmap_override_url" type="text" class="inputbox" size="40" label="Gmap Override Url" />
+			
+		<field name="state" type="list"
+			label="JSTATUS" description="Set state for location"
+			class="inputbox" size="1" default="1" >
+			<option value="1">JPUBLISHED</option>
+			<option value="0">JUNPUBLISHED</option>
+			<option value="2">JARCHIVED</option>
+			<option value="-2">JTRASH</option>
+		</field>
+		
+		<field name="brand_type" type="list"
+			label="Brand Type"
+			class="inputbox" size="1" default="manufacturer" >
+			<option value="business">Business</option>
+			<option value="manufacturer">Manufacturer</option>
+		</field>
+		
+		<field name="ordering" type="ordering" class="inputbox"
+
+			label="JFIELD_ORDERING_LABEL" description="JFIELD_ORDERING_DESC" />
+
+		<field name="description" type="editor" class="inputbox"
+			rows="7" cols="40" label="Description"
+			filter="JComponentHelper::filterText" buttons="true" />
+			
+		<field name="images2content" type="images2content"
+			label="Images" description="Upload images to content"
+			class="inputbox" rel="description"
+			addfieldpath="/administrator/components/com_je_content/models/fields"
+		/>
+		
+		<field name="images" type="file" label="Logo" />
+		<field name="del_image" type="checkbox" value="1" />
+		<field name="hidden_image" type="hidden" />
+		
+	</fieldset>
+
+	<fieldset name="publish"
+		label="COM_JE_ESCORT_GROUP_LABEL_PUBLISHING_DETAILS"
+	>
+
+		<field name="created" type="calendar"
+			label="Created" description="Created"
+			class="inputbox" size="22" format="%Y-%m-%d %H:%M:%S"
+			filter="user_utc" />
+
+	</fieldset>
+
+</form>

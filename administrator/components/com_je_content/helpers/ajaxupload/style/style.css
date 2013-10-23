@@ -1,0 +1,42 @@
+.msg {
+	text-align:left;
+	color: blue;
+	display: block;
+	padding: 5px 0;
+}
+
+.emsg {
+	text-align:left;
+	color: red;
+	display: block;
+	padding: 5px 0;
+}
+
+#loader{
+   visibility:hidden;
+}
+
+#f1_error{
+   font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+   font-weight:bold;
+   color:#FF0000;
+}
+
+#f1_ok{
+   font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+   font-weight:bold;
+   color:#00FF00;
+
+}
+
+#f1_upload_process {
+   z-index:100;
+   visibility:hidden;
+   position:absolute;
+   margin: 10px 0 0;
+   width:220px;
+}
+
+#f1_upload_process span { display: block; padding-left: 7px; }

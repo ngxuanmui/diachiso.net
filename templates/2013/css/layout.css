@@ -1,0 +1,51 @@
+@CHARSET "UTF-8";
+
+.container { width: 960px; margin: 0; padding: 0; }
+
+.span12 {
+    width: 960px;
+}
+
+.span11 {
+	width: 880px;
+}
+
+.span10 {
+	width: 800px;
+}
+
+.span9 {
+	width: 720px;
+}
+
+.span8 {
+	width: 640px;
+}
+
+.span7 {
+	width: 560px;
+}
+
+.span6 {
+	width: 480px;
+}
+
+.span5 {
+	width: 400px;
+}
+
+.span4 {
+	width: 320px;
+}
+
+.span3 {
+	width: 240px;
+}
+
+.span2 {
+	width: 160px;
+}
+
+.span1 {
+	width: 80px;
+}

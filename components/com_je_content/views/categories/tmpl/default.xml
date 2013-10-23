@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: metadata.xml $ -->
+<metadata>
+	<layout title="com_je_content_categories_view_default_title" option="com_je_content_categories_view_default_option">
+		<message>
+			<![CDATA[com_je_content_categories_view_default_desc]]>
+		</message>
+	</layout>
+</metadata>

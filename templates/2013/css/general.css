@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+
+* { font-family: sans-serif; }
+[class*="span"] {
+	float: left;
+	min-height: 1px;
+}
+
+.fltlft { float: left; }
+.fltrgt { float: right; }
+.clr { clear: both; }
+.round { border-radius: 5px; }
+.absolute { position: absolute; }
+.relative { position: relative; }
+
+ul { margin: 0; padding: 0; list-style: none; }
+
+.margin-auto { margin: 0 auto; }

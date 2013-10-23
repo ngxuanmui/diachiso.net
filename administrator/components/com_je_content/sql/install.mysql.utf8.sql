@@ -1,0 +1,26 @@
+
+CREATE TABLE IF NOT EXISTS `#__je_content` (
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
+  `params` TEXT NOT NULL ,
+  `featured` TINYINT(1)  NOT NULL ,
+  `images` VARCHAR(255)  NOT NULL ,
+  `fulltext` LONGTEXT NOT NULL ,
+  `alias` VARCHAR(255)  NOT NULL ,
+  `introtext` TEXT NOT NULL ,
+  `title` VARCHAR(255)  NOT NULL ,
+  `catid` INT(11)  NOT NULL ,
+  `state` TINYINT(3) NOT NULL DEFAULT '0',
+  `ordering` INTEGER NOT NULL DEFAULT '0',
+  `metakey` TEXT NOT NULL,
+  `metadesc` text NOT NULL,
+  `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `created_by` int(10) unsigned NOT NULL DEFAULT '0',
+  `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `modified_by` int(10) unsigned NOT NULL DEFAULT '0',
+  `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
+  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `language` char(7) NOT NULL DEFAULT '',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Manage Articles';

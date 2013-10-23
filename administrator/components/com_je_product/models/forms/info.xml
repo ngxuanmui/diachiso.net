@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<!-- $Id: banner.xml 20085 2011-01-05 02:42:55Z eddieajau $ -->
+<form>
+	<fieldset name="details"
+		addfieldpath="/administrator/components/com_carman/models/fields"
+	>
+		<field name="id" type="text" default="0" 
+			readonly="true" class="readonly"
+			label="JGLOBAL_FIELD_ID_LABEL" 	description ="JGLOBAL_FIELD_ID_DESC" />
+
+		<field name="name" type="text" class="inputbox"
+			size="40" label="Name" required="true" />
+			
+		<field name="alias" type="text" class="inputbox"
+			size="40" label="JFIELD_ALIAS_LABEL" />
+			
+		<field name="city" type="text" class="inputbox" size="40" label="City" />
+		
+		<field name="postcode" type="text" class="inputbox" size="40" label="Postcode" />
+		
+		<field name="gmap_intergrate" type="checkbox" value="1" class="inputbox" size="40" label="Gmap intergration" />
+		
+		<field name="gmap_override_url" type="text" class="inputbox" size="40" label="Gmap Override Url" />
+			
+		<field name="state" type="list"
+			label="JSTATUS" description="Set state for location"
+			class="inputbox" size="1" default="1" >
+			<option value="1">JPUBLISHED</option>
+			<option value="0">JUNPUBLISHED</option>
+			<option value="2">JARCHIVED</option>
+			<option value="-2">JTRASH</option>
+		</field>
+		
+		<field name="ordering" type="ordering" class="inputbox"
+
+			label="JFIELD_ORDERING_LABEL" description="JFIELD_ORDERING_DESC" />
+
+		<field name="description" type="textarea" class="inputbox"
+			rows="7" cols="40" label="Directions" />
+
+		
+	</fieldset>
+
+	<fieldset name="publish"
+		label="COM_JE_ESCORT_GROUP_LABEL_PUBLISHING_DETAILS"
+	>
+
+		<field name="created" type="calendar"
+			label="Created" description="Created"
+			class="inputbox" size="22" format="%Y-%m-%d %H:%M:%S"
+			filter="user_utc" />
+
+	</fieldset>
+
+</form>

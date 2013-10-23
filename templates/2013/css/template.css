@@ -1,0 +1,69 @@
+@CHARSET "UTF-8";
+
+body { background: #f3f3f3; margin: 0; padding: 0; }
+#header { height: 180px; }
+#logo { display: block; background: url('../images/logo.jpg') no-repeat; width: 278px; height: 75px; top: 80px; }
+
+.sf-main-bg {
+	width: 100%;
+	height: 59px;
+	background: #d5d5d5;
+	position: absolute;
+	top: 180px;
+	left: 0px;
+	z-index: -1;
+}
+
+.sf-container {
+clear: both;
+margin: 0;
+padding: 0 0px 1px;
+width: 960px;
+margin: 0 auto;
+height: 58px;
+position: relative;
+background: transparent url(../images/bg_blocktopmenu.png) repeat-x 0 0;
+}
+
+.sf-menu > li {
+float: left;
+position: relative;
+background: transparent url(../images/bg_li_blocktopmenu.png) no-repeat 100% 0;
+}
+.sf-menu, .sf-menu * {
+margin: 0;
+padding: 0;
+list-style: none;
+}
+.sf-menu > li > a {
+display: block;
+margin-right: 1px;
+padding: 8px 21px 21px 22px;
+border: 0;
+text-decoration: none;
+color: #fff;
+font-size: 17px;
+line-height: 30px;
+letter-spacing: 0px;
+position: relative;
+}
+a > .sf-sub-indicator {
+top: 11px;
+background-position: 0 -100px;
+}
+
+.sf-menu > li > a em {
+position: absolute;
+left: 0;
+bottom: 1px;
+width: 100%;
+height: 7px;
+background: #23a638;
+-webkit-transition: all 0.2s ease-out;
+-moz-transition: all 0.2s ease-out;
+transition: all 0.2s ease-out;
+}
+
+a:hover em {
+height: 14px;
+}
