@@ -14,6 +14,9 @@
 		<field name="alias" type="text" class="inputbox"
 			size="40" label="JFIELD_ALIAS_LABEL" />
 			
+		<field name="slogan" type="text" class="inputbox"
+			size="40" label="Slogan" />
+			
 		<field name="website" type="text" class="inputbox"
 			size="40" label="Website" />
 			

@@ -40,6 +40,9 @@ $filterType = $session->get('filter_type');
 				<li><?php echo $this->form->getLabel('slogan'); ?>
 				<?php echo $this->form->getInput('slogan'); ?></li>
 				
+				<li><?php echo $this->form->getLabel('website'); ?>
+				<?php echo $this->form->getInput('website'); ?></li>
+				
 				<li><?php echo $this->form->getLabel('national_id'); ?>
 				<?php echo $this->form->getInput('national_id'); ?></li>
 				

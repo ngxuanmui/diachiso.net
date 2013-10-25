@@ -37,6 +37,12 @@ $filterType = $session->get('filter_type');
 				<li><?php echo $this->form->getLabel('alias'); ?>
 				<?php echo $this->form->getInput('alias'); ?></li>
 				
+				<li><?php echo $this->form->getLabel('slogan'); ?>
+				<?php echo $this->form->getInput('slogan'); ?></li>
+				
+				<li><?php echo $this->form->getLabel('website'); ?>
+				<?php echo $this->form->getInput('website'); ?></li>
+				
 				<li><?php echo $this->form->getLabel('images'); ?>
 				<?php echo $this->form->getInput('images'); ?></li>
 				
@@ -51,9 +57,6 @@ $filterType = $session->get('filter_type');
 					<span style="float: left; line-height: 23px;">Delete Image</span>
 				</li>
 				<?php endif; ?>
-				
-				<li><?php echo $this->form->getLabel('website'); ?>
-				<?php echo $this->form->getInput('website'); ?></li>
 				
 				<li><?php echo $this->form->getLabel('customcategory'); ?>
 				<?php echo $this->form->getInput('customcategory'); ?></li>
