@@ -50,8 +50,8 @@ class je_productHelper
 		
 		JSubMenuHelper::addEntry(
 			JText::_('Providers'),
-			'index.php?option=com_je_product&view=infos',
-			($vName == 'infos')
+			'index.php?option=com_je_product&view=providers',
+			($vName == 'providers')
 		);
 		
 		JSubMenuHelper::addEntry(

@@ -37,6 +37,9 @@ $filterType = $session->get('filter_type');
 				<li><?php echo $this->form->getLabel('alias'); ?>
 				<?php echo $this->form->getInput('alias'); ?></li>
 				
+				<li><?php echo $this->form->getLabel('slogan'); ?>
+				<?php echo $this->form->getInput('slogan'); ?></li>
+				
 				<li><?php echo $this->form->getLabel('national_id'); ?>
 				<?php echo $this->form->getInput('national_id'); ?></li>
 				

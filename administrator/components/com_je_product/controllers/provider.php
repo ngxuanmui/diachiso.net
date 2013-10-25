@@ -17,7 +17,7 @@ jimport('joomla.application.component.controllerform');
  * @subpackage	com_carman
  * @since		1.6
  */
-class JE_ProductControllerBrand extends JControllerForm
+class JE_ProductControllerProvider extends JControllerForm
 {
 	/**
 	 * @var		string	The prefix to use with controller messages.
@@ -46,7 +46,7 @@ class JE_ProductControllerBrand extends JControllerForm
 		}
 
 		if ($allow === null) {
-			// In the absense of better brand, revert to the component permissions.
+			// In the absense of better provider, revert to the component permissions.
 			return parent::allowAdd($data);
 		} else {
 			return $allow;

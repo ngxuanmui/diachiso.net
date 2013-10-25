@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: Brands.php 20267 2011-01-11 03:44:44Z eddieajau $
+ * @version		$Id: Providers.php 20267 2011-01-11 03:44:44Z eddieajau $
  * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -10,13 +10,13 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.modellist');
 
 /**
- * Methods supporting a list of Brand records.
+ * Methods supporting a list of Provider records.
  *
  * @package		Joomla.Administrator
  * @subpackage	com_je_product
  * @since		1.6
  */
-class JE_ProductModelBrands extends JModelList
+class JE_ProductModelProviders extends JModelList
 {
 	/**
 	 * Constructor.
@@ -60,7 +60,7 @@ class JE_ProductModelBrands extends JModelList
 			$query	= $db->getQuery(true);
 			$query->select('MAX(ordering) as `max`, type');
 			$query->select('type');
-			$query->from('#__cl_diamond_brand');
+			$query->from('#__cl_diamond_provider');
 			$query->group('type');
 			$db->setQuery($query);
 			$this->cache['typeorders'] = $db->loadAssocList('type', '');
@@ -88,7 +88,7 @@ class JE_ProductModelBrands extends JModelList
 				'a.*'
 			)
 		);
-		$query->from('`#__je_brands` AS a');
+		$query->from('`#__je_providers` AS a');
 
 		// Filter by search in title
 		$search = $this->getState('filter.search');
@@ -115,7 +115,7 @@ class JE_ProductModelBrands extends JModelList
 		
 		// Join over the categories.
 		$query->select('c.title AS national');
-		$query->join('LEFT', '#__categories AS c ON c.id = a.national_id');
+		$query->join('LEFT', '#__categories AS c ON c.id = a.province_id');
 
 		// Add the list ordering clause.
 		$orderCol	= $this->state->get('list.ordering');
@@ -158,7 +158,7 @@ class JE_ProductModelBrands extends JModelList
 	 * @return	JTable	A database object
 	 * @since	1.6
 	 */
-	public function getTable($type = 'Brand', $prefix = 'JE_ProductTable', $config = array())
+	public function getTable($type = 'Provider', $prefix = 'JE_ProductTable', $config = array())
 	{
 		return JTable::getInstance($type, $prefix, $config);
 	}
@@ -189,7 +189,7 @@ class JE_ProductModelBrands extends JModelList
 		$params = JComponentHelper::getParams('com_je_product');
 		$this->setState('params', $params);
 
-		// List state brandrmation.
+		// List state providerrmation.
 		parent::populateState('ordering', 'asc');
 	}
 }

@@ -54,12 +54,12 @@ $filterType = $session->get('filter_type');
 					<?php echo JHtml::_('grid.sort', 'Title', 'name', $listDirn, $listOrder); ?>
 				</th>
 				<th width="10%">
+					Brand Type
+				</th>
+				<th width="10%">
 					National
 				</th>
 				<?php /*?>
-				<th width="10%">
-					Categories
-				</th>
 				<th width="10%">
 					Products
 				</th>
@@ -107,6 +107,13 @@ $filterType = $session->get('filter_type');
 					<?php else : ?>
 						<?php echo $this->escape($item->name); ?>
 					<?php endif; ?>
+					<?php if ($item->slogan): ?>
+					<br>
+					<small><?php echo $item->slogan; ?></small>
+					<?php endif; ?>
+				</td>
+				<td>
+					<?php echo ucfirst($item->brand_type); ?>
 				</td>
 				<td>
 					<?php echo $item->national; ?>

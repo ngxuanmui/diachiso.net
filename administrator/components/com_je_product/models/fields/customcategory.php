@@ -11,6 +11,10 @@ jQuery().ready(function($){
 	$('.category-checkbox').click(function(){
 		setFocus($(this));		
 	});
+
+	$('.category-checkbox').each(function(){
+		setFocus($(this));
+	});
 });
 
 function setFocus(obj)

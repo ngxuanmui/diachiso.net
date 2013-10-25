@@ -20,13 +20,13 @@ $filterType = $session->get('filter_type');
 <script type="text/javascript">
 	Joomla.submitbutton = function(task)
 	{
-		if (task == 'brand.cancel' || document.formvalidator.isValid(document.id('brand-form'))) {
-			Joomla.submitform(task, document.getElementById('brand-form'));
+		if (task == 'provider.cancel' || document.formvalidator.isValid(document.id('provider-form'))) {
+			Joomla.submitform(task, document.getElementById('provider-form'));
 		}
 	}
 </script>
 
-<form action="<?php echo JRoute::_('index.php?option=com_je_product&layout=edit&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="brand-form" class="form-validate"  enctype="multipart/form-data">
+<form action="<?php echo JRoute::_('index.php?option=com_je_product&layout=edit&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="provider-form" class="form-validate"  enctype="multipart/form-data">
 	<div class="width-60 fltlft">
 		<fieldset class="adminform">
 			<legend>Details</legend>
@@ -36,12 +36,6 @@ $filterType = $session->get('filter_type');
 				
 				<li><?php echo $this->form->getLabel('alias'); ?>
 				<?php echo $this->form->getInput('alias'); ?></li>
-				
-				<li><?php echo $this->form->getLabel('national_id'); ?>
-				<?php echo $this->form->getInput('national_id'); ?></li>
-				
-				<li><?php echo $this->form->getLabel('brand_type'); ?>
-				<?php echo $this->form->getInput('brand_type'); ?></li>
 				
 				<li><?php echo $this->form->getLabel('images'); ?>
 				<?php echo $this->form->getInput('images'); ?></li>
@@ -57,6 +51,9 @@ $filterType = $session->get('filter_type');
 					<span style="float: left; line-height: 23px;">Delete Image</span>
 				</li>
 				<?php endif; ?>
+				
+				<li><?php echo $this->form->getLabel('website'); ?>
+				<?php echo $this->form->getInput('website'); ?></li>
 				
 				<li><?php echo $this->form->getLabel('customcategory'); ?>
 				<?php echo $this->form->getInput('customcategory'); ?></li>
@@ -79,7 +76,12 @@ $filterType = $session->get('filter_type');
 	</div>
 
 <div class="width-40 fltrt">
-	<?php echo JHtml::_('sliders.start','brand-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
+	<?php echo JHtml::_('sliders.start','provider-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
+		
+	<?php echo JHtml::_('sliders.panel',JText::_('Addresses'), 'address-details'); ?>
+		<fieldset class="panelform">
+			<?php echo $this->form->getInput('addresses'); ?>
+		</fieldset>
 
 	<?php echo JHtml::_('sliders.panel',JText::_('COM_JE_PRODUCT_GROUP_LABEL_PUBLISHING_DETAILS'), 'publishing-details'); ?>
 		<fieldset class="panelform">

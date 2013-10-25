@@ -24,7 +24,7 @@ $saveOrder	= $listOrder=='ordering';
 $session = JFactory::getSession();
 $filterType = $session->get('filter_type');
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_je_product&view=brands'); ?>" method="post" name="adminForm" id="adminForm">
+<form action="<?php echo JRoute::_('index.php?option=com_je_product&view=providers'); ?>" method="post" name="adminForm" id="adminForm">
 	<fieldset id="filter-bar">
 		<div class="filter-search fltlft">
 			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></label>
@@ -102,7 +102,7 @@ $filterType = $session->get('filter_type');
 						<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'Infos.', $canCheckin); ?>
 					<?php endif; ?>
 					<?php if ($canEdit) : ?>
-						<a href="<?php echo JRoute::_('index.php?option=com_je_product&task=brand.edit&id='.(int) $item->id); ?>">
+						<a href="<?php echo JRoute::_('index.php?option=com_je_product&task=provider.edit&id='.(int) $item->id); ?>">
 							<?php echo $this->escape($item->name); ?></a>
 					<?php else : ?>
 						<?php echo $this->escape($item->name); ?>

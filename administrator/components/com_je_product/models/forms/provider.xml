@@ -14,23 +14,41 @@
 		<field name="alias" type="text" class="inputbox"
 			size="40" label="JFIELD_ALIAS_LABEL" />
 			
+		<field name="website" type="text" class="inputbox"
+			size="40" label="Website" />
+			
 		<field name="customcategory"
 			type="customcategory"
 			action="check"
 			extension="com_je_product"
 			label="JCATEGORY"
-			description="JFIELD_CATEGORY_DESC"
+			get_value="#__je_provider_category, category_id, provider_id"
 			class="inputbox"
 		/>
+		
+		<field name="addresses" type="addresses" />
 			
-		<field name="national_id" type="category" extension="com_je_product.national"
-			label="National"
-			class="inputbox" required="true"
+		<field name="province_id" type="multicategory" extension="com_je_product.province"
+			label="Province"
+			class="inputbox" size="1" multiple="true" selectbox="true"
 		>
-			<option value="">- Select National -</option>
+			<option value="">- Select Province -</option>
 		</field>
 		
-		<field name="postcode" type="text" class="inputbox" size="40" label="Postcode" />
+		<field name="address" type="text" class="inputbox"
+			size="40" label="Address" multiple="true" />
+			
+		<field name="phone" type="text" class="inputbox"
+			size="40" label="Phone" multiple="true" />
+			
+		<field name="hotline" type="text" class="inputbox"
+			size="40" label="Hotline" multiple="true" />
+			
+		<field name="nick_yahoo_support" type="text" class="inputbox"
+			size="40" label="Nick Yahoo" multiple="true" />
+			
+		<field name="nick_skype_support" type="text" class="inputbox"
+			size="40" label="Nick Skype" multiple="true" />
 		
 		<field name="gmap_intergrate" type="checkbox" value="1" class="inputbox" size="40" label="Gmap intergration" />
 		
@@ -43,13 +61,6 @@
 			<option value="0">JUNPUBLISHED</option>
 			<option value="2">JARCHIVED</option>
 			<option value="-2">JTRASH</option>
-		</field>
-		
-		<field name="brand_type" type="list"
-			label="Brand Type"
-			class="inputbox" size="1" default="manufacturer" >
-			<option value="business">Business</option>
-			<option value="manufacturer">Manufacturer</option>
 		</field>
 		
 		<field name="ordering" type="ordering" class="inputbox"

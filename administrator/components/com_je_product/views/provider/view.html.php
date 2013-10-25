@@ -17,11 +17,12 @@ jimport('joomla.application.component.view');
  * @subpackage	com_carman
  * @since		1.5
  */
-class JE_ProductViewBrand extends JView
+class JE_ProductViewProvider extends JView
 {
 	protected $form;
 	protected $item;
 	protected $state;
+	protected $addresses;
 
 	/**
 	 * Display the view
@@ -61,30 +62,30 @@ class JE_ProductViewBrand extends JView
 		$session = JFactory::getSession();
 		$type = $session->get('filter_type');
 		
-		JToolBarHelper::title($isNew ? JText::_('Brand Manager: New') : JText::_('Brand Manager: Edit'), 'banners.png');
+		JToolBarHelper::title($isNew ? JText::_('Provider Manager: New') : JText::_('Provider Manager: Edit'), 'banners.png');
 
 		
 
 		// If not checked out, can save the item.
 		if (!$checkedOut && ($canDo->get('core.edit') || $canDo->get('core.create'))) {
-			JToolBarHelper::apply('brand.apply', 'JTOOLBAR_APPLY');
-			JToolBarHelper::save('brand.save', 'JTOOLBAR_SAVE');
+			JToolBarHelper::apply('provider.apply', 'JTOOLBAR_APPLY');
+			JToolBarHelper::save('provider.save', 'JTOOLBAR_SAVE');
 
 			if ($canDo->get('core.create')) {
-				JToolBarHelper::custom('brand.save2new', 'save-new.png', 'save-new_f2.png', 'JTOOLBAR_SAVE_AND_NEW', false);
+				JToolBarHelper::custom('provider.save2new', 'save-new.png', 'save-new_f2.png', 'JTOOLBAR_SAVE_AND_NEW', false);
 			}
 		}
 
 		// If an existing item, can save to a copy.
 		if (!$isNew && $canDo->get('core.create')) {
-			JToolBarHelper::custom('brand.save2copy', 'save-copy.png', 'save-copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
+			JToolBarHelper::custom('provider.save2copy', 'save-copy.png', 'save-copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
 		}
 
 		if (empty($this->item->id))  {
-			JToolBarHelper::cancel('brand.cancel','JTOOLBAR_CANCEL');
+			JToolBarHelper::cancel('provider.cancel','JTOOLBAR_CANCEL');
 		}
 		else {
-			JToolBarHelper::cancel('brand.cancel', 'JTOOLBAR_CLOSE');
+			JToolBarHelper::cancel('provider.cancel', 'JTOOLBAR_CLOSE');
 		}
 	}
 }

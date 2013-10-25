@@ -17,7 +17,7 @@ jimport('joomla.application.component.controlleradmin');
  * @subpackage	com_je_product
  * @since		1.6
  */
-class JE_ProductControllerBrands extends JControllerAdmin
+class JE_ProductControllerProviders extends JControllerAdmin
 {
 	/**
 	 * @var		string	The prefix to use with controller messages.
@@ -42,7 +42,7 @@ class JE_ProductControllerBrands extends JControllerAdmin
 	 * Proxy for getModel.
 	 * @since	1.6
 	 */
-	public function getModel($name = 'Brand', $prefix = 'JE_ProductModel', $config = array('ignore_request' => true))
+	public function getModel($name = 'Provider', $prefix = 'JE_ProductModel', $config = array('ignore_request' => true))
 	{
 		$model = parent::getModel($name, $prefix, $config);
 		return $model;

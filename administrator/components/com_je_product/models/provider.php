@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: brand.php 20228 2011-01-10 00:52:54Z eddieajau $
+ * @version		$Id: provider.php 20228 2011-01-10 00:52:54Z eddieajau $
  * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -11,13 +11,13 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.modeladmin');
 
 /**
- * brand model.
+ * provider model.
  *
  * @package		Joomla.Administrator
  * @subpackage	com_je_product
  * @since		1.6
  */
-class JE_ProductModelBrand extends JModelAdmin
+class JE_ProductModelProvider extends JModelAdmin
 {
 	/**
 	 * @var		string	The prefix to use with controller messages.
@@ -74,7 +74,7 @@ class JE_ProductModelBrand extends JModelAdmin
 	 * @return	JTable	A database object
 	 * @since	1.6
 	 */
-	public function getTable($type = 'Brand', $prefix = 'JE_ProductTable', $config = array())
+	public function getTable($type = 'Provider', $prefix = 'JE_ProductTable', $config = array())
 	{
 		return JTable::getInstance($type, $prefix, $config);
 	}
@@ -90,13 +90,13 @@ class JE_ProductModelBrand extends JModelAdmin
 	public function getForm($data = array(), $loadData = true)
 	{
 		// Get the form.
-		$form = $this->loadForm('com_je_product.brand', 'brand', array('control' => 'jform', 'load_data' => $loadData));
+		$form = $this->loadForm('com_je_product.provider', 'provider', array('control' => 'jform', 'load_data' => $loadData));
 		if (empty($form)) {
 			return false;
 		}
 
 		// Determine correct permissions to check.
-		if ($this->getState('brand.id')) {
+		if ($this->getState('provider.id')) {
 			// Existing record. Can only edit in selected categories.
 			$form->setFieldAttribute('catid', 'action', 'core.edit');
 		} else {
@@ -134,7 +134,7 @@ class JE_ProductModelBrand extends JModelAdmin
 	protected function loadFormData()
 	{
 		// Check the session for previously entered form data.
-		$data = JFactory::getApplication()->getUserState('com_je_product.edit.brand.data', array());
+		$data = JFactory::getApplication()->getUserState('com_je_product.edit.provider.data', array());
 
 		if (empty($data)) {
 			$data = $this->getItem();
@@ -148,7 +148,7 @@ class JE_ProductModelBrand extends JModelAdmin
 		{
 			$data['hidden_image'] = base64_encode($data['images']);
 		}
-
+		
 		return $data;
 	}
 
@@ -180,17 +180,19 @@ class JE_ProductModelBrand extends JModelAdmin
 		
 		$db = JFactory::getDbo();
 		
-		$brandId = ($data['id']) ? $data['id'] : $db->insertid();
+		$providerId = ($data['id']) ? $data['id'] : $db->insertid();
 		
-		//delete all recs in #__je_brand_category that brand_id = last id
-		$query = "DELETE FROM #__je_brand_category WHERE brand_id = '$brandId'";
+		$this->saveAddresses($providerId, $data);
+		
+		//delete all recs in #__je_provider_category that provider_id = last id
+		$query = "DELETE FROM #__je_provider_category WHERE provider_id = '$providerId'";
 		$db->setQuery($query);
 		
 		$db->query();
 		
 		if($db->getErrorMsg())
 		{
-			die('Error: '.$query);
+			die('Query: '.$query.'. Error: ' . $db->getErrorMsg());
 		}
 		
 		$post 	= JRequest::get('post');
@@ -198,7 +200,7 @@ class JE_ProductModelBrand extends JModelAdmin
 		//for each category, insert
 		foreach ($post['jform']['customcategory'] as $catId)
 		{				
-			$query = "INSERT INTO #__je_brand_category SET brand_id = '$brandId', category_id = '$catId';";
+			$query = "INSERT INTO #__je_provider_category SET provider_id = '$providerId', category_id = '$catId';";
 			$db->setQuery($query);
 		
 			$db->query();
@@ -214,7 +216,7 @@ class JE_ProductModelBrand extends JModelAdmin
 		$data['images'] = $images;
 		
 		// update content
-		$content = $this->copyFilesOnSave($data['description'], $brandId);
+		$content = $this->copyFilesOnSave($data['description'], $providerId);
 			
 		if ($content)
 			$data['description'] = $content;
@@ -226,6 +228,13 @@ class JE_ProductModelBrand extends JModelAdmin
 		return $saveResult;
 	}
 	
+	/**
+	 * Function to copy image in content from temp to folder on host
+	 * 
+	 * @param string $content Content
+	 * @param int $itemId Item ID
+	 * @return Content converted
+	 */
 	private function copyFilesOnSave($content = '', $itemId = 0)
 	{
 		if(!$content || !$itemId)
@@ -233,7 +242,7 @@ class JE_ProductModelBrand extends JModelAdmin
 	
 		$date = date('Y') . DS . date('m') . DS . date('d');
 	
-		$dest = JPATH_ROOT . DS . 'images' . DS . 'brand-content' . DS . $date . DS . $itemId . DS;
+		$dest = JPATH_ROOT . DS . 'images' . DS . 'provider-content' . DS . $date . DS . $itemId . DS;
 		@mkdir($dest, 0777, true);
 	
 		$doc=new DOMDocument();
@@ -255,7 +264,7 @@ class JE_ProductModelBrand extends JModelAdmin
 				
 			// Search & Replace
 			$tmpSearch[] = $img['src'];
-			$tmpReplace[] = 'images/brand-content/' . str_replace(DS, '/', $date) . '/' . $itemId . '/' . end($imgSrc);
+			$tmpReplace[] = 'images/provider-content/' . str_replace(DS, '/', $date) . '/' . $itemId . '/' . end($imgSrc);
 	
 			$src = str_replace('/', DS, JPATH_ROOT.'/'.$img['src']);
 	
@@ -268,8 +277,93 @@ class JE_ProductModelBrand extends JModelAdmin
 		return $content;
 	}
 	
+	/**
+	 * Function to save provider addresses
+	 * 
+	 * @param int $providerId Provider ID
+	 * @param array $data Data (form post)
+	 * @return boolean
+	 */
+	private function saveAddresses($providerId, $data = array())
+	{
+		if (empty($data['province_id']) || empty($data['address']))
+			return 1;
+		
+		$provinceIds 	= $data['province_id'];
+		$addresses 		= $data['address'];
+		$phone 			= $data['phone'];
+		$hotline 		= $data['hotline'];
+		$nick_yahoo_support = $data['nick_yahoo_support'];
+		$nick_skype_support = $data['nick_skype_support'];
+		
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		
+		$created = date('Y-m-d H:i:s');
+		
+		$table = '#__je_provider_addresses';
+		
+		// delete all addresses before save
+		$query->delete($table)->where('provider_id = ' . $providerId);
+		
+		$db->setQuery($query);
+		$db->query();
+		
+		if ($db->getErrorMsg())
+			die ($db->getErrorMsg());
+		
+		foreach ($provinceIds as $key => $provinceId)
+		{
+			if (!empty($provinceId))
+			{
+				if (!empty($addresses[$key]))
+				{
+					$val = array();
+					
+					$val['provider_id'] 	= $providerId;
+					$val['province_id'] 	= $provinceId;
+					$val['address'] 		= $db->quote($addresses[$key]);
+					$val['phone'] 			= $db->quote($phone[$key]);
+					$val['hotline'] 		= $db->quote($hotline[$key]);
+					$val['nick_yahoo_support'] = $db->quote($nick_yahoo_support[$key]);
+					$val['nick_skype_support'] = $db->quote($nick_skype_support[$key]);
+					$val['state'] 			= 1;
+					$val['created'] 		= $db->quote($created);
+					
+					$columns = implode(',', array_keys($val));
+					$values = implode(',', $val);
+					
+					$query->clear()
+							->insert($table)
+							->columns($columns)
+							->values($values)
+					;
+					
+					$db->setQuery($query);
+					$db->query();
+					
+					if ($db->getErrorMsg())
+						die ($db->getErrorMsg());
+				}
+			}
+		}
+		
+		return true;
+	}
+	
+	/**
+	 * Function to upload images
+	 * 
+	 * @param string $field Field name
+	 * @param int $itemId Item ID
+	 * @param boolean $delImage Delete image or not
+	 * @param string $oldImg Old image name
+	 * @return image name
+	 */
 	private function uploadImages($field = 'images', $itemId = 0, $delImage = 0, $oldImg = '')
 	{
+		$storeImageFolder = 'providers';
+		
 		$jFileInput = new JInput($_FILES);
 		$file = $jFileInput->get('jform', array(), 'array');
 	
@@ -304,7 +398,7 @@ class JE_ProductModelBrand extends JModelAdmin
 	
 		$path = ($field == 'images') ? 'thumbs' : 'featured';
 	
-		$dest = JPATH_ROOT . DS . 'images' . DS . 'je_content' . DS . $path . DS . $date . DS . $itemId . DS;
+		$dest = JPATH_ROOT . DS . 'images' . DS . $storeImageFolder . DS . $path . DS . $date . DS . $itemId . DS;
 	
 		// Make directory
 		@mkdir($dest, 0777, true);
@@ -329,7 +423,7 @@ class JE_ProductModelBrand extends JModelAdmin
 			}
 	
 			// set value to return
-			$image = 'images/je_content/'.$path.'/' . str_replace(DS, '/', $date) . '/' . $itemId . '/' . $fileName;
+			$image = 'images/'.$storeImageFolder.'/'.$path.'/' . str_replace(DS, '/', $date) . '/' . $itemId . '/' . $fileName;
 				
 			//			return $image;
 		}
