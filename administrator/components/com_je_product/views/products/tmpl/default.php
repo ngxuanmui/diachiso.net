@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
+JHtml::_('behavior.modal');
 JHTML::_('script','system/multiselect.js',false,true);
 $user	= JFactory::getUser();
 $userId	= $user->get('id');
@@ -20,6 +21,12 @@ $listDirn	= $this->state->get('list.direction');
 $canOrder	= $user->authorise('core.edit.state', 'com_je_product.category');
 $saveOrder	= $listOrder=='ordering';
 ?>
+
+<style>
+<!--
+#sbox-btn-close { display: none; }
+-->
+</style>
 <form action="<?php echo JRoute::_('index.php?option=com_je_product&view=products'); ?>" method="post" name="adminForm" id="adminForm">
 	<fieldset id="filter-bar">
 		<div class="filter-search fltlft">
@@ -52,8 +59,14 @@ $saveOrder	= $listOrder=='ordering';
 				<th class="title">
 					<?php echo JHtml::_('grid.sort',  'Name', 'name', $listDirn, $listOrder); ?>
 				</th>
+				<th width="5%">
+					<?php echo 'Providers'; ?>
+				</th>
 				<th width="10%">
 					<?php echo JHtml::_('grid.sort', 'JCATEGORY', 'category_title', $listDirn, $listOrder); ?>
+				</th>
+				<th width="10%">
+					<?php echo JHtml::_('grid.sort',  'Brand', 'brand_name', $listDirn, $listOrder); ?>
 				</th>
 				<th width="5%">
 					<?php echo JHtml::_('grid.sort',  'Hits', 'hits', $listDirn, $listOrder); ?>
@@ -109,7 +122,15 @@ $saveOrder	= $listOrder=='ordering';
 						<?php echo JText::sprintf('JGLOBAL_LIST_ALIAS', $this->escape($item->alias));?></p>
 				</td>
 				<td class="center">
+					<a href="<?php echo JRoute::_('index.php?option=com_je_product&view=providers&tmpl=component&layout=product_providers&category_id=' . $item->catid . '&product_id=' . $item->id, false)?>" class="modal" rel="{handler: 'iframe', size: {x:800, y:500}, closable:false }">
+						Providers
+					</a>
+				</td>
+				<td class="left">
 					<?php echo $this->escape($item->category_title); ?>
+				</td>
+				<td class="left">
+					<?php echo $this->escape($item->brand_name); ?>
 				</td>
 				<td class="center">
 					<?php echo $this->escape($item->hits); ?>

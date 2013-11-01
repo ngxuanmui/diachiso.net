@@ -430,4 +430,52 @@ class JE_ProductModelProvider extends JModelAdmin
 	
 		return $image;
 	}
+	
+
+
+	/**
+	 * Insert provider id and product id to relationship table: product_provider
+	 * 
+	 * @param Array $providerId
+	 * @param Int $productId
+	 * @return boolean
+	 */
+	public function saveProvider($providerId = array(), $productId = 0)
+	{
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		
+		// make unique provider id
+		$providerId = array_unique($providerId);
+		
+// 		var_dump($providerId); die;
+	
+		$table = '#__je_product_provider';
+		
+		// delete before insert
+		$query->delete($table)->where('product_id = ' . $productId);
+		
+		$db->setQuery($query);
+		$db->query();
+		
+		if ($db->getErrorMsg())
+			die ($db->getErrorMsg());
+	
+		foreach ($providerId as $pId)
+		{
+			$query->clear()
+					->insert($table)
+					->columns('product_id, provider_id')
+					->values($productId . ',' . $pId)
+			;
+				
+			$db->setQuery($query);
+			$db->query();
+				
+			if ($db->getErrorMsg())
+				die ($db->getErrorMsg());
+		}
+	
+		return true;
+	}
 }

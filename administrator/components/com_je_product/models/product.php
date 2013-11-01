@@ -155,7 +155,7 @@ class je_productModelProduct extends JModelAdmin
 		
 		if($saveResult)
 		{
-			$uploadPath 		= JPATH_ROOT . DS . 'images' . DS . 'je_products' . DS . 'upload' . DS;
+			$uploadPath 		= JPATH_ROOT . DS . 'images' . DS . 'products' . DS . 'upload' . DS;
 			
 			//upload file		
 			$imagesUpload = $this->uploadFiles($record->alias . '-' . $record->id, $uploadPath);

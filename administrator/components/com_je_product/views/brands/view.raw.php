@@ -11,19 +11,18 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.view');
 
 /**
- * View class for a list of providers.
+ * View class for a list of brands.
  *
  * @package		Joomla.Administrator
  * @subpackage	com_je_product
  * @since		1.6
  */
-class JE_ProductViewProviders extends JView
+class JE_ProductViewBrands extends JView
 {
 	protected $categories;
 	protected $items;
 	protected $pagination;
 	protected $state;
-	protected $providers;
 
 	/**
 	 * Display the view
@@ -35,7 +34,6 @@ class JE_ProductViewProviders extends JView
 		$this->items		= $this->get('Items');
 		$this->pagination	= $this->get('Pagination');
 		$this->state		= $this->get('State');
-		$this->providers 	= $this->get('Providers');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -62,44 +60,44 @@ class JE_ProductViewProviders extends JView
 		
 		$type = $session->get('filter_type');
 		
-		JToolBarHelper::title(JText::_('Providers Manager'), 'banners.png');
+		JToolBarHelper::title(JText::_('Brands Manager'), 'banners.png');
 			
 		if ($canDo->get('core.create')) {
-			JToolBarHelper::addNew('provider.add','JTOOLBAR_NEW');
+			JToolBarHelper::addNew('brand.add','JTOOLBAR_NEW');
 		}
 
 		if (($canDo->get('core.edit'))) {
-			JToolBarHelper::editList('provider.edit','JTOOLBAR_EDIT');
+			JToolBarHelper::editList('brand.edit','JTOOLBAR_EDIT');
 		}
 
 		if ($canDo->get('core.edit.state')) {
 			if ($this->state->get('filter.state') != 2){
 				JToolBarHelper::divider();
-				JToolBarHelper::custom('providers.publish', 'publish.png', 'publish_f2.png','JTOOLBAR_PUBLISH', true);
-				JToolBarHelper::custom('providers.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_UNPUBLISH', true);
+				JToolBarHelper::custom('brands.publish', 'publish.png', 'publish_f2.png','JTOOLBAR_PUBLISH', true);
+				JToolBarHelper::custom('brands.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_UNPUBLISH', true);
 			}
 
 			if ($this->state->get('filter.state') != -1 ) {
 				JToolBarHelper::divider();
 				if ($this->state->get('filter.state') != 2) {
-					JToolBarHelper::archiveList('providers.archive','JTOOLBAR_ARCHIVE');
+					JToolBarHelper::archiveList('brands.archive','JTOOLBAR_ARCHIVE');
 				}
 				else if ($this->state->get('filter.state') == 2) {
-					JToolBarHelper::unarchiveList('providers.publish', 'JTOOLBAR_UNARCHIVE');
+					JToolBarHelper::unarchiveList('brands.publish', 'JTOOLBAR_UNARCHIVE');
 				}
 			}
 		}
 
 		if ($canDo->get('core.edit.state')) {
-			JToolBarHelper::custom('providers.checkin', 'checkin.png', 'checkin_f2.png', 'JTOOLBAR_CHECKIN', true);
+			JToolBarHelper::custom('brands.checkin', 'checkin.png', 'checkin_f2.png', 'JTOOLBAR_CHECKIN', true);
 		}
 
 		if ($this->state->get('filter.state') == -2 && $canDo->get('core.delete')) {
-			JToolBarHelper::deleteList('', 'providers.delete','JTOOLBAR_EMPTY_TRASH');
+			JToolBarHelper::deleteList('', 'brands.delete','JTOOLBAR_EMPTY_TRASH');
 			JToolBarHelper::divider();
 		}
 		else if ($canDo->get('core.edit.state')) {
-			JToolBarHelper::trash('providers.trash','JTOOLBAR_TRASH');
+			JToolBarHelper::trash('brands.trash','JTOOLBAR_TRASH');
 			JToolBarHelper::divider();
 		}
 

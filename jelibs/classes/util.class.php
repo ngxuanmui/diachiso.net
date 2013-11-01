@@ -39,7 +39,7 @@ class JEUtil
 		}
 	}
 	
-	function is_serialized($data)
+	static public function is_serialized($data)
 	{ 
 	    if (trim($data) == "") 
 	        return false;
@@ -50,7 +50,7 @@ class JEUtil
 	    return false; 
 	}
 	
-	function thumb($images, $pathUpload, $pathThumb, $thumbW, $thumbH = null, $crop = true)
+	static public function thumb($images, $pathUpload, $pathThumb, $thumbW, $thumbH = null, $crop = true)
 	{
 		//get array of image
 		$images = unserialize($images);

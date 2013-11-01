@@ -14,7 +14,53 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 ?>
+
+<style>
+<!--
+.list-brand { float: left; }
+-->
+</style>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
 <script type="text/javascript">
+
+jQuery.noConflict();
+
+select_brand();
+
+function select_brand()
+{
+	jQuery(function($){
+		
+		var t = $('#jform_catid');
+
+		if (t.val() == '')
+			$('.brand').remove();
+
+		$('.brand').remove();
+
+		var html = '<label class="brand">&nbsp;</label><div class="brand list-brand">Waiting ...</div>';
+
+		$(html).insertAfter(t);
+
+		$.post(
+				'index.php?option=com_je_product&view=brands&layout=list_brand&format=raw', 
+				{ 'category_id': t.val(), 'brand_id' : '<?php echo (!empty($this->item->brand_id)) ? $this->item->brand_id : 0; ?>' }, 
+				function(res){
+					$('.brand').remove();
+					
+					var html = '<label class="brand">&nbsp;</label><div class="brand list-brand">';
+
+					html += res;
+					
+					html += '</div>';
+					
+					$(html).insertAfter(t);
+				}
+		);
+	});
+}
 
 	window.addEvent('domready', function() {
 		 
@@ -131,6 +177,7 @@ JHtml::_('behavior.formvalidation');
 				<li><?php echo $this->form->getLabel('product_promotion_state'); ?>
 				<?php echo $this->form->getInput('product_promotion_state'); ?></li>
 				
+				<?php /*?>
 				<li><?php echo $this->form->getLabel('product_state'); ?>
 				<?php echo $this->form->getInput('product_state'); ?></li>
 				
@@ -139,6 +186,7 @@ JHtml::_('behavior.formvalidation');
 				
 				<li><?php echo $this->form->getLabel('promotion_price'); ?>
 				<?php echo $this->form->getInput('promotion_price'); ?></li>
+				*/ ?>
 				
 				<li><?php echo $this->form->getLabel('images'); ?>
 				<?php echo $this->form->getInput('images'); ?>

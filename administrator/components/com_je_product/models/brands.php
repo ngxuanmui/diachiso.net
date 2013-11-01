@@ -85,7 +85,7 @@ class JE_ProductModelBrands extends JModelList
 		$query->select(
 			$this->getState(
 				'list.select',
-				'a.*'
+				'DISTINCT (a.id) AS id, a.*'
 			)
 		);
 		$query->from('`#__je_brands` AS a');
@@ -116,12 +116,23 @@ class JE_ProductModelBrands extends JModelList
 		// Join over the categories.
 		$query->select('c.title AS national');
 		$query->join('LEFT', '#__categories AS c ON c.id = a.national_id');
+		
+		// filter by category id
+		$categoryId = $this->getState('filter.category_id');
+		
+		if ($categoryId)
+		{
+			$query->join('INNER', '#__je_brand_category bc ON a.id = bc.brand_id');
+			$query->where('bc.category_id = ' . $categoryId);
+		}
 
 		// Add the list ordering clause.
 		$orderCol	= $this->state->get('list.ordering');
 		$orderDirn	= $this->state->get('list.direction');
 		
 		$query->order($db->getEscaped($orderCol.' '.$orderDirn));
+		
+// 		echo $query->dump();
 
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;
@@ -182,8 +193,8 @@ class JE_ProductModelBrands extends JModelList
 		$state = $this->getUserStateFromRequest($this->context.'.filter.state', 'filter_state', '', 'string');
 		$this->setState('filter.state', $state);
 
-		$categoryId = $this->getUserStateFromRequest($this->context.'.filter.type', 'filter_type', '');
-		$this->setState('filter.type', $categoryId);
+		$categoryId = $this->getUserStateFromRequest($this->context.'.filter.category_id', 'category_id', '');
+		$this->setState('filter.category_id', $categoryId);
 
 		// Load the parameters.
 		$params = JComponentHelper::getParams('com_je_product');

@@ -99,6 +99,11 @@ $filterType = $session->get('filter_type');
 			<?php endforeach; ?>
 			</ul>
 		</fieldset>
+	
+	<?php echo JHtml::_('sliders.panel', JText::_('JGLOBAL_FIELDSET_METADATA_OPTIONS'), 'meta-options'); ?>
+		<fieldset class="panelform">
+			<?php echo $this->loadTemplate('metadata'); ?>
+		</fieldset>
 
 	<?php echo JHtml::_('sliders.end'); ?>
 	<input type="hidden" name="task" value="" />

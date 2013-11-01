@@ -16,7 +16,7 @@ jimport('joomla.application.component.modellist');
  * @subpackage	com_banners
  * @since		1.6
  */
-class je_productModelProducts extends JModelList
+class Je_ProductModelProducts extends JModelList
 {
 	/**
 	 * Method to get the maximum ordering value for each category.
@@ -78,6 +78,10 @@ class je_productModelProducts extends JModelList
 		// Join over the users for the checked out user.
 		$query->select('user.name AS user_post');
 		$query->join('LEFT', '#__users AS user ON user.id=a.userid');
+		
+		// Join over the brands for brand name
+		$query->select('brand.name AS brand_name');
+		$query->join('LEFT', '#__je_brands brand ON a.brand_id = brand.id');
 
 		// Filter by published state
 		$published = $this->getState('filter.state');
@@ -165,7 +169,7 @@ class je_productModelProducts extends JModelList
 	 *
 	 * @since	1.6
 	 */
-	protected function populateState()
+	protected function populateState($ordering = null, $direction = null)
 	{
 		// Initialise variables.
 		$app = JFactory::getApplication('administrator');

@@ -113,6 +113,15 @@ class JE_ProductModelProviders extends JModelList
 			$query->where('(a.state IN (0, 1))');
 		}
 		
+		// filter by category id
+		$categoryId = $this->getState('filter.category_id');
+		
+		if ($categoryId)
+		{
+			$query->join('INNER', '#__je_provider_category pc ON a.id = pc.provider_id');
+			$query->where('pc.category_id = ' . $categoryId);
+		}
+		
 		// Join over the categories.
 		$query->select('c.title AS national');
 		$query->join('LEFT', '#__categories AS c ON c.id = a.province_id');
@@ -122,6 +131,8 @@ class JE_ProductModelProviders extends JModelList
 		$orderDirn	= $this->state->get('list.direction');
 		
 		$query->order($db->getEscaped($orderCol.' '.$orderDirn));
+		
+// 		echo $query->dump();
 
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;
@@ -182,8 +193,12 @@ class JE_ProductModelProviders extends JModelList
 		$state = $this->getUserStateFromRequest($this->context.'.filter.state', 'filter_state', '', 'string');
 		$this->setState('filter.state', $state);
 
-		$categoryId = $this->getUserStateFromRequest($this->context.'.filter.type', 'filter_type', '');
-		$this->setState('filter.type', $categoryId);
+		$categoryId = $this->getUserStateFromRequest($this->context.'.filter.category_id', 'filter_category_id', '');
+		
+		if (!$categoryId)
+			$categoryId = JRequest::getInt('category_id');
+		
+		$this->setState('filter.category_id', $categoryId);
 
 		// Load the parameters.
 		$params = JComponentHelper::getParams('com_je_product');
@@ -191,5 +206,32 @@ class JE_ProductModelProviders extends JModelList
 
 		// List state providerrmation.
 		parent::populateState('ordering', 'asc');
+	}
+	
+	/**
+	 * Get providers
+	 * @param int $productId
+	 */
+	public function getProviders()
+	{
+		$productId = JRequest::getInt('product_id');
+		
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		
+		$query->select('p.*')
+				->from('#__je_providers p')
+				->join('LEFT', '#__je_product_provider pp ON p.id = pp.provider_id')
+				->where('pp.product_id = ' . (int) $productId)
+				->order('p.id DESC')
+		;
+		
+		$db->setQuery($query);
+		$rs = $db->loadObjectList();
+		
+		if ($db->getErrorMsg())
+			die ($db->getErrorMsg());
+		
+		return $rs;
 	}
 }

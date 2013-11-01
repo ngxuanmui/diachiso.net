@@ -48,5 +48,27 @@ class JE_ProductControllerProviders extends JControllerAdmin
 		return $model;
 	}
 	
-	
+	public function save_provider()
+	{
+		$jInput = JFactory::getApplication()->input;
+		
+		$post = $jInput->post;
+		
+		$model = $this->getModel();
+		
+		$providerId = $post->get('provider_id', array(), 'array');
+		$productId = $jInput->getInt('product_id', 0);
+		
+		/* use this var to filter providers */
+		$categoryId = $jInput->getInt('category_id', 0);
+		
+		$return = $model->saveProvider($providerId, $productId);
+		
+		$url = JRoute::_('index.php?option=com_je_product&view=providers&layout=product_providers&tmpl=component&product_id=' . $productId . '&category_id=' . $categoryId, false);
+		$msg = 'Save Successful!';
+		
+		$this->setRedirect($url, $msg);
+		
+		return $return;
+	}
 }

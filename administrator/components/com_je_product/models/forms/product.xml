@@ -21,6 +21,8 @@
 		<field name="alias" type="text" class="inputbox"
 			size="40" label="JFIELD_ALIAS_LABEL" description="Alias" />
 			
+		<field name="brand_id"  />
+			
 		<field name="price" type="text" class="inputbox"
 			size="40" label="COM_JE_PRODUCT_FIELD_PRICE_LABEL"
 			description="COM_JE_PRODUCT_FIELD_PRICE_DESC" />
@@ -35,6 +37,7 @@
 		<field name="catid" type="category" extension="com_je_product"
 			label="Category" description="Category"
 			class="inputbox" required="true"
+			onchange="select_brand()"
 		>
 			<option value="">- Select Category -</option>
 		</field>
@@ -79,7 +82,7 @@
 		<field name="old_images" type="hidden" class="inputbox" />
 		<field name="old_thumb_images" type="hidden" class="inputbox" />
 
-		<field name="product_promotion_state" type="list" label="Promotion Product"
+		<field name="product_promotion_state" type="list" label="Promotion State"
 			class="inputbox" size="1" default="normal" >
 			<option value="normal">Normal</option>
 			<option value="new">New</option>
