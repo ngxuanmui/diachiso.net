@@ -204,9 +204,15 @@ function select_brand()
 			<?php echo $this->form->getInput('description'); ?>
 			
 			<div class="clr"> </div>
-			<?php echo $this->form->getLabel('content'); ?>
+			<?php echo $this->form->getLabel('featured_content'); ?>
 			<div class="clr"> </div>
-			<?php echo $this->form->getInput('content'); ?>
+			<?php echo $this->form->getInput('featured_content'); ?>
+			<div class="clr"> </div>
+			<?php echo $this->form->getLabel('tech_content'); ?>
+			<div class="clr"> </div>
+			<?php echo $this->form->getInput('tech_content'); ?>
+			
+			<div class="clr"> </div>
 
 		</fieldset>
 	</div>

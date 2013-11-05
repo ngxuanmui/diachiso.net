@@ -23,7 +23,7 @@ class JE_ProductModelBrand extends JModelAdmin
 	 * @var		string	The prefix to use with controller messages.
 	 * @since	1.6
 	 */
-	protected $text_prefix = 'COM_CARMAN_INFO';
+	protected $text_prefix = 'COM_JE_PRODUCT_BRAND';
 
 	/**
 	 * Method to test whether a record can be deleted.
@@ -182,6 +182,96 @@ class JE_ProductModelBrand extends JModelAdmin
 		
 		$brandId = ($data['id']) ? $data['id'] : $db->insertid();
 		
+		$post 	= JRequest::get('post');
+		
+		$jinput = JFactory::getApplication()->input;
+		
+		// delete all sub brands before re-insert sub brands
+		$query = "DELETE FROM #__je_sub_brands WHERE brand_id = '$brandId'";
+		$db->setQuery($query);
+		
+		$db->query();
+		
+		if($db->getErrorMsg())
+		{
+			die('Error: '.$query);
+		}
+		
+		$subBrandsTitle = $jinput->post->get('sub_brand_title', array(), 'array');
+		$subBrandsDesc = $jinput->post->get('sub_brand_desc', array(), 'array');
+		$files = $jinput->files->get('jform');
+		
+		$subBrandsFile = $files['sub_brand_logo'];
+		
+		var_dump($subBrandsFile);
+		
+		$created = explode('-', date('Y-m-d', strtotime($data['created'])));
+		
+		$strPath = 'images' . DS . 'sub_brands' . DS . $created[0] . DS . $created[1] . DS . $created[2] . DS . $data['id'] . DS;
+		
+		$subBrandLogoPath = JPATH_ROOT . DS . $strPath;
+		
+		// Make directory
+		@mkdir($subBrandLogoPath, 0777, true);
+		
+// 		var_dump($data['created'], $created, $subBrandLogoPath);
+
+// 		var_dump($subBrandsFile);
+		
+		$subBrandCreated = date('Y-m-d H:i:s');
+		$subBrandCreatedBy = JFactory::getUser()->id;
+		
+		foreach ($subBrandsTitle as $key => $title)
+		{
+			if ($title != '')
+			{
+				$desc = $subBrandsDesc[$key];
+				
+				$image = '';
+				
+				$fileUpload = $subBrandsFile[$key];
+				
+				$fileName = $fileUpload['name'];
+				
+				if (isset($fileName) && $fileName) 
+				{
+					$filepath = JPath::clean($subBrandLogoPath . $fileName);
+				
+					// Move uploaded file
+					jimport('joomla.filesystem.file');
+				
+					if (!JFile::upload($fileUpload['tmp_name'], $filepath))
+					{
+						JError::raiseWarning(100, JText::_('COM_MEDIA_ERROR_UNABLE_TO_UPLOAD_FILE')); // Error in upload
+						return '';
+					}
+				
+					// set value to return
+					$image = str_replace(DS, '/', $strPath) . $fileName;
+				}
+				
+				$query = "INSERT INTO #__je_sub_brands SET	brand_id 	= '$brandId', 
+															title 		= '$title', 
+															description = ".$db->quote($desc).", 
+															logo 		= '$image', 
+															state 		= 1, 
+															created 	= '$subBrandCreated', 
+															created_by 	= '$subBrandCreatedBy';";
+				$db->setQuery($query);
+				
+				$db->query();
+				
+				if($db->getErrorMsg())
+				{
+					die('Query: '.$query.'. Error: ' . $db->getErrorMsg());
+				}
+			}
+		}
+		
+// 		var_dump($subBrandsTitle, $subBrandsDesc, $subBrandsFile['sub_brand_logo']);
+		
+// 		die;
+		
 		//delete all recs in #__je_brand_category that brand_id = last id
 		$query = "DELETE FROM #__je_brand_category WHERE brand_id = '$brandId'";
 		$db->setQuery($query);
@@ -192,8 +282,6 @@ class JE_ProductModelBrand extends JModelAdmin
 		{
 			die('Error: '.$query);
 		}
-		
-		$post 	= JRequest::get('post');
 		
 		//for each category, insert
 		foreach ($post['jform']['customcategory'] as $catId)
@@ -304,7 +392,7 @@ class JE_ProductModelBrand extends JModelAdmin
 	
 		$path = ($field == 'images') ? 'thumbs' : 'featured';
 	
-		$dest = JPATH_ROOT . DS . 'images' . DS . 'je_content' . DS . $path . DS . $date . DS . $itemId . DS;
+		$dest = JPATH_ROOT . DS . 'images' . DS . 'brands' . DS . $path . DS . $date . DS . $itemId . DS;
 	
 		// Make directory
 		@mkdir($dest, 0777, true);
@@ -329,7 +417,7 @@ class JE_ProductModelBrand extends JModelAdmin
 			}
 	
 			// set value to return
-			$image = 'images/je_content/'.$path.'/' . str_replace(DS, '/', $date) . '/' . $itemId . '/' . $fileName;
+			$image = 'images/brands/'.$path.'/' . str_replace(DS, '/', $date) . '/' . $itemId . '/' . $fileName;
 				
 			//			return $image;
 		}

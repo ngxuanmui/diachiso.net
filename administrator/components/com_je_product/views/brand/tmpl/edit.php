@@ -46,9 +46,6 @@ $filterType = $session->get('filter_type');
 				<li><?php echo $this->form->getLabel('national_id'); ?>
 				<?php echo $this->form->getInput('national_id'); ?></li>
 				
-				<li><?php echo $this->form->getLabel('brand_type'); ?>
-				<?php echo $this->form->getInput('brand_type'); ?></li>
-				
 				<li><?php echo $this->form->getLabel('images'); ?>
 				<?php echo $this->form->getInput('images'); ?></li>
 				
@@ -98,6 +95,15 @@ $filterType = $session->get('filter_type');
 					<?php echo $field->input; ?>
 				</li>
 			<?php endforeach; ?>
+			</ul>
+		</fieldset>
+		
+	<?php echo JHtml::_('sliders.panel',JText::_('Sub Brands'), 'sub-brands'); ?>
+		<fieldset class="panelform">
+			<ul class="adminformlist">
+				<li>
+					<?php echo $this->form->getInput('subbrand'); ?>
+				</li>
 			</ul>
 		</fieldset>
 		

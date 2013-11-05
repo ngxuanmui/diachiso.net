@@ -58,7 +58,13 @@
 
 		<field name="description" type="editor" class="inputbox"
 			rows="3" cols="30" label="COM_JE_PRODUCT_FIELD_DESCRIPTION_LABEL" filter="safehtml"
-			description="COM_JE_PRODUCT_FIELD_DESCRIPTION_DESC" />
+			description="COM_JE_PRODUCT_FIELD_DESCRIPTION_DESC" buttons="false" />
+			
+		<field name="featured_content" type="editor" class="inputbox"
+			rows="3" cols="30" label="Featured" filter="safehtml" buttons="false" />
+			
+		<field name="tech_content" type="editor" class="inputbox"
+			rows="3" cols="30" label="Tech Content" filter="safehtml" buttons="false" />
 
 		<!-- field name="content" type="editor" class="inputbox"
 			rows="3" cols="30" label="Content" filter="safehtml" /-->

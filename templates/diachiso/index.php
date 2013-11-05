@@ -11,8 +11,10 @@ defined('_JEXEC') or die;
 
 jimport('joomla.filesystem.file');
 
-// check modules
+// Remove Mootools
+$this->_script = $this->_scripts = array();
 
+// check modules
 JHtml::_('behavior.framework', true);
 
 // get params
@@ -24,6 +26,14 @@ $doc->addStyleSheet($this->baseurl.'/templates/'.$this->template.'/css/position.
 $doc->addStyleSheet($this->baseurl.'/templates/'.$this->template.'/css/layout.css', $type = 'text/css', $media = 'screen,projection');
 $doc->addStyleSheet($this->baseurl.'/templates/'.$this->template.'/css/template.css', $type = 'text/css', $media = 'screen,projection');
 $doc->addStyleSheet($this->baseurl.'/templates/'.$this->template.'/css/print.css', $type = 'text/css', $media = 'print');
+
+/* jquery */
+$doc->addScript('//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js', 'text/javascript');
+
+$bxSliderPath = JURI::root() . 'media/website/jquery.bxslider';
+
+$doc->addStyleSheet($bxSliderPath.'/jquery.bxslider.css');
+$doc->addScript($bxSliderPath . '/jquery.bxslider.min.js', 'text/javascript');
 
 $files = JHtml::_('stylesheet', 'templates/'.$this->template.'/css/general.css', null, false, true);
 if ($files):
@@ -44,6 +54,14 @@ endif;
 <!--[if IE 7]>
 <link href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/ie7only.css" rel="stylesheet" type="text/css" />
 <![endif]-->
+
+<script type="text/javascript">
+<!--
+jQuery.noConflict();
+
+var BASE_URL = '<?php echo JURI::base(); ?>';
+//-->
+</script>
 
 </head>
 
@@ -117,18 +135,36 @@ endif;
 		</div>
 	</div>
 
+	<?php if ($this->countModules('featured-banner')): ?>
 	<div id="rt-showcase">
 		<div class="showcase">
 			<div class="rt-container homepage">
 				<div class="rt-grid-12 rt-alpha rt-omega">
 					<div class="rt-block">
-						<img alt="Image" src="<?php echo $this->baseurl.'/templates/'.$this->template.'/images/1.jpg'; ?>">
+						<jdoc:include type="modules" name="featured-banner" style="none"  />
 					</div>
 				</div>
 				<div class="clear"></div>
 			</div>
 		</div>
 	</div>
+	
+	<script type="text/javascript">
+	<!--
+	jQuery(function($){
+		$('ul#featured-banner').bxSlider({
+			mode: 'fade',
+			auto: true,
+			autoControls: false,
+			pause: 2000,
+			autoHover: true,
+			pager: false
+		});
+	});
+	//-->
+	</script>
+	
+	<?php endif; ?>
 
 		<div id="rt-maintop">
 			<div class="rt-container">
