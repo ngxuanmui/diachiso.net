@@ -38,6 +38,11 @@ $filterType = $session->get('filter_type');
 				<option value=""><?php echo JText::_('JOPTION_SELECT_PUBLISHED');?></option>
 				<?php echo JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter.state'), true);?>
 			</select>
+
+			<select name="filter_category_id" class="inputbox" onchange="this.form.submit()">
+				<option value=""><?php echo JText::_('JOPTION_SELECT_CATEGORY');?></option>
+				<?php echo JHtml::_('select.options', JHtml::_('category.options', 'com_je_product'), 'value', 'text', $this->state->get('filter.category_id'));?>
+			</select>
 			
 			
 		</div>
@@ -52,9 +57,6 @@ $filterType = $session->get('filter_type');
 				</th>
 				<th>
 					<?php echo JHtml::_('grid.sort', 'Title', 'name', $listDirn, $listOrder); ?>
-				</th>
-				<th width="10%">
-					Brand Type
 				</th>
 				<th width="10%">
 					National
@@ -111,9 +113,6 @@ $filterType = $session->get('filter_type');
 					<br>
 					<small><?php echo $item->slogan; ?></small>
 					<?php endif; ?>
-				</td>
-				<td>
-					<?php echo ucfirst($item->brand_type); ?>
 				</td>
 				<td>
 					<?php echo $item->national; ?>

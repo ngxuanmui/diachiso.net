@@ -186,8 +186,10 @@ class JE_ProductModelBrand extends JModelAdmin
 		
 		$jinput = JFactory::getApplication()->input;
 		
+		$subBrandsId = $jinput->post->get('sub_brand_id', array(), 'array');
+		
 		// delete all sub brands before re-insert sub brands
-		$query = "DELETE FROM #__je_sub_brands WHERE brand_id = '$brandId'";
+		$query = "DELETE FROM #__je_sub_brands WHERE brand_id = '$brandId' AND id NOT IN (".(implode(',', $subBrandsId)).")";
 		$db->setQuery($query);
 		
 		$db->query();
@@ -199,6 +201,7 @@ class JE_ProductModelBrand extends JModelAdmin
 		
 		$subBrandsTitle = $jinput->post->get('sub_brand_title', array(), 'array');
 		$subBrandsDesc = $jinput->post->get('sub_brand_desc', array(), 'array');
+		$subBrandsLogoUploaded = $jinput->post->get('sub_brand_logo_uploaded', array(), 'array');
 		$files = $jinput->files->get('jform');
 		
 		$subBrandsFile = $files['sub_brand_logo'];
@@ -249,14 +252,35 @@ class JE_ProductModelBrand extends JModelAdmin
 					// set value to return
 					$image = str_replace(DS, '/', $strPath) . $fileName;
 				}
+				else 
+				{
+					if ($subBrandsLogoUploaded[$key] != '')
+						$image = base64_decode($subBrandsLogoUploaded[$key]);
+				}
 				
-				$query = "INSERT INTO #__je_sub_brands SET	brand_id 	= '$brandId', 
-															title 		= '$title', 
-															description = ".$db->quote($desc).", 
-															logo 		= '$image', 
-															state 		= 1, 
-															created 	= '$subBrandCreated', 
-															created_by 	= '$subBrandCreatedBy';";
+				if (isset($subBrandsId[$key]))
+				{
+					$query = "UPDATE #__je_sub_brands SET ";
+				}
+				else 
+				{
+					$query = "INSERT INTO #__je_sub_brands SET ";
+				}
+				
+				$query .= "	brand_id 	= '$brandId', 
+							title 		= '$title', 
+							description = ".$db->quote($desc).", 
+							logo 		= '$image'
+						";
+				
+				if (isset($subBrandsId[$key]))
+					$query .= ' WHERE id = ' . $subBrandsId[$key];
+				else
+					$query .= "	,
+								state 		= 1, 
+								created 	= '$subBrandCreated', 
+								created_by 	= '$subBrandCreatedBy';";
+				
 				$db->setQuery($query);
 				
 				$db->query();

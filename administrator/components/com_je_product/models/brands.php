@@ -192,8 +192,8 @@ class JE_ProductModelBrands extends JModelList
 
 		$state = $this->getUserStateFromRequest($this->context.'.filter.state', 'filter_state', '', 'string');
 		$this->setState('filter.state', $state);
-
-		$categoryId = $this->getUserStateFromRequest($this->context.'.filter.category_id', 'category_id', '');
+		
+		$categoryId = $this->getUserStateFromRequest($this->context.'.filter.category_id', 'filter_category_id');
 		$this->setState('filter.category_id', $categoryId);
 
 		// Load the parameters.
@@ -201,6 +201,23 @@ class JE_ProductModelBrands extends JModelList
 		$this->setState('params', $params);
 
 		// List state brandrmation.
-		parent::populateState('ordering', 'asc');
+		parent::populateState('id', 'desc');
+	}
+	
+	public function getSubBrands()
+	{
+		$brandId = JRequest::getInt('brand_id', 0);
+		
+		$db = JFactory::getDbo();
+		
+		$query = $db->getQuery(true);
+		
+		$query->select('*')->from('#__je_sub_brands')->where('brand_id = ' . $brandId);
+		
+		$db->setQuery($query);
+		
+		$rs = $db->loadObjectList();
+		
+		return $rs;
 	}
 }

@@ -64,6 +64,9 @@ class JFormFieldSubBrand extends JFormFieldList
 				$html[] = '			<input type="hidden" name="sub_brand_logo_uploaded[]" value="'. base64_encode($subBrand->logo) .'" />';
 			}
 			
+			
+			$html[] = '				<input type="hidden" name="sub_brand_id[]" value="'. $subBrand->id .'" />';
+			
 			$html[] = '			</div>';		
 			$html[] = '			<ul>';
 			$html[] = '				<li><span>Title :</span> <input type="text" name="sub_brand_title[]" value="'.$subBrand->title.'" /></li>';		
@@ -81,7 +84,6 @@ class JFormFieldSubBrand extends JFormFieldList
 		$html[] = '				<li><span>Title :</span> <input type="text" name="sub_brand_title[]" /></li>';
 		$html[] = '				<li><span>Desc :</span> <textarea name="sub_brand_desc[]"></textarea></li>';
 		$html[] = '				<li><span>File :</span> <input type="file" name="jform[sub_brand_logo][]" /></li>';
-		$html[] = '				<li><a href="#" class="remove-sub-brand">Remove</a></li>';
 		$html[] = '			</ul>';
 		$html[] = '		</div>';
 			
@@ -102,13 +104,13 @@ class JFormFieldSubBrand extends JFormFieldList
 
 #list-sub-brand-tmpl { display: none; }
 #sub-brand { float: left; border: 0px solid #CCC; padding: 0; }
-.sub-brand-tmpl { clear: both; display-none; margin-bottom: 10px; float: left; border-bottom: 1px solid #CCC; padding-bottom: 10px; }
+.sub-brand-tmpl { clear: both; display-none; margin-bottom: 10px; float: left; border-bottom: 0px solid #CCC; padding-bottom: 10px; }
 .sub-brand-tmpl span { float: left; line-height: 23px; width: 40px; }
 .sub-brand-tmpl input { width: 200px !important; }
 .sub-brand-tmpl textarea { width: 196px !important; }
 .sub-brand-tmpl ul { float: left; width: 300px; }
 .sub-brand-tmpl ul li { width: 100%; float: left; margin-bottom: 0px; }
-.sub-brand-logo img { width: 100px; margin: 0; }
+.sub-brand-logo img { width: 100px; margin: 0; padding-top: 8px; }
 .sub-brand-tmpl .sub-brand-logo { float: left; width: 100px; height: 100px; border: 0px solid #CCC; overflow: hidden; margin-right: 10px; }
 -->
 </style>
@@ -127,7 +129,10 @@ window.addEvent('domready', function(){
 	});
 
 	$(document.body).addEvent('click:relay(.remove-sub-brand)', function(){
-		this.getParent().getParent().destroy();
+		
+		if (confirm('Are you sure?'))
+			this.getParent().getParent().destroy();
+		
 		return false;
 	});
 });

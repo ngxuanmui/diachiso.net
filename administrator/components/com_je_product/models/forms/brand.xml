@@ -65,7 +65,7 @@
 
 		<field name="description" type="editor" class="inputbox"
 			rows="7" cols="40" label="Description"
-			filter="JComponentHelper::filterText" buttons="true" />
+			filter="JComponentHelper::filterText" buttons="false" />
 			
 		<field name="images2content" type="images2content"
 			label="Images" description="Upload images to content"

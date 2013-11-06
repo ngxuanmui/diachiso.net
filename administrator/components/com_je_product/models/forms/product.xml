@@ -22,6 +22,8 @@
 			size="40" label="JFIELD_ALIAS_LABEL" description="Alias" />
 			
 		<field name="brand_id"  />
+		
+		<field name="sub_brand_id"  />
 			
 		<field name="price" type="text" class="inputbox"
 			size="40" label="COM_JE_PRODUCT_FIELD_PRICE_LABEL"
@@ -57,13 +59,19 @@
 
 
 		<field name="description" type="editor" class="inputbox"
-			rows="3" cols="30" label="COM_JE_PRODUCT_FIELD_DESCRIPTION_LABEL" filter="safehtml"
+			rows="3" cols="30" label="Desc" filter="safehtml" height="350"
 			description="COM_JE_PRODUCT_FIELD_DESCRIPTION_DESC" buttons="false" />
 			
-		<field name="featured_content" type="editor" class="inputbox"
+		<field name="images2content" type="images2content"
+			label="Images" description="Upload images to content"
+			class="inputbox" rel="description"
+			addfieldpath="/administrator/components/com_je_content/models/fields"
+		/>
+			
+		<field name="featured_content" type="editor" class="inputbox" height="350"
 			rows="3" cols="30" label="Featured" filter="safehtml" buttons="false" />
 			
-		<field name="tech_content" type="editor" class="inputbox"
+		<field name="tech_content" type="editor" class="inputbox" height="350"
 			rows="3" cols="30" label="Tech Content" filter="safehtml" buttons="false" />
 
 		<!-- field name="content" type="editor" class="inputbox"

@@ -83,6 +83,15 @@ $filterType = $session->get('filter_type');
 
 <div class="width-40 fltrt">
 	<?php echo JHtml::_('sliders.start','brand-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
+		
+	<?php echo JHtml::_('sliders.panel',JText::_('Sub Brands'), 'sub-brands'); ?>
+		<fieldset class="panelform">
+			<ul class="adminformlist">
+				<li>
+					<?php echo $this->form->getInput('subbrand'); ?>
+				</li>
+			</ul>
+		</fieldset>
 
 	<?php echo JHtml::_('sliders.panel',JText::_('COM_JE_PRODUCT_GROUP_LABEL_PUBLISHING_DETAILS'), 'publishing-details'); ?>
 		<fieldset class="panelform">
@@ -95,15 +104,6 @@ $filterType = $session->get('filter_type');
 					<?php echo $field->input; ?>
 				</li>
 			<?php endforeach; ?>
-			</ul>
-		</fieldset>
-		
-	<?php echo JHtml::_('sliders.panel',JText::_('Sub Brands'), 'sub-brands'); ?>
-		<fieldset class="panelform">
-			<ul class="adminformlist">
-				<li>
-					<?php echo $this->form->getInput('subbrand'); ?>
-				</li>
 			</ul>
 		</fieldset>
 		

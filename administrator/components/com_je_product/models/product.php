@@ -207,9 +207,64 @@ class je_productModelProduct extends JModelAdmin
 			
 				$db->query();
 			}
+			
+			// update content
+			$content = $this->copyFilesOnSave($data['description'], $itemId, $data['created']);
+				
+			if ($content)
+				$data['description'] = $content;
+				
+			$data['id'] = $itemId;
+			
+			$saveResult = parent::save($data);
 		}
 		
 		return $saveResult;
+	}
+	
+	private function copyFilesOnSave($content = '', $itemId = 0, $created = false)
+	{
+		if(!$content || !$itemId)
+			return false;
+	
+		$tmpCreated = explode('-', date('Y-m-d', strtotime($created)));
+		
+		$date = $tmpCreated[0] . DS . $tmpCreated[1] . DS . $tmpCreated[2];
+	
+		$dest = JPATH_ROOT . DS . 'images' . DS . 'product-content' . DS . $date . DS . $itemId . DS;
+		
+		@mkdir($dest, 0777, true);
+	
+		$doc=new DOMDocument();
+	
+		$doc->loadHTML($content);
+	
+		// just to make xpath more simple
+		$xml=simplexml_import_dom($doc);
+	
+		$images=$xml->xpath('//img');
+	
+		$tmpSearch = array();
+		$tmpReplace = array();
+	
+		foreach ($images as $img)
+		{
+			// Explode src to get file name
+			$imgSrc = explode('/', $img['src']);
+	
+			// Search & Replace
+			$tmpSearch[] = $img['src'];
+			$tmpReplace[] = 'images/product-content/' . str_replace(DS, '/', $date) . '/' . $itemId . '/' . end($imgSrc);
+	
+			$src = str_replace('/', DS, JPATH_ROOT.'/'.$img['src']);
+	
+			if($imgSrc[0] == 'tmp')
+				JFile::copy($src, $dest.end($imgSrc));
+		}
+	
+		$content = str_replace($tmpSearch, $tmpReplace, $content);
+	
+		return $content;
 	}
 	
 	function uploadFiles($fileName, $uploadPath)

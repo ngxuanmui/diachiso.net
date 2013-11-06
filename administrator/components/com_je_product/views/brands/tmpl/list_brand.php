@@ -1,7 +1,14 @@
 <?php
+$categoryId = JRequest::getInt('category_id', 0);
 $brandId = JRequest::getInt('brand_id');
-$categoryId = JRequest::getInt('category_id');
+$subBrandId = JRequest::getInt('sub_brand_id');
 ?>
+
+<script>
+jQuery(function(){
+	parent.changeBrand('#jform_brand_id', jQuery('#jform_brand_id').val(), <?php echo $subBrandId; ?>);
+});
+</script>
 
 <?php if (!empty($categoryId)): ?>
 	<?php if (!empty($this->items)): ?>
