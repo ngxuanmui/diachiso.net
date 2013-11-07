@@ -15,7 +15,7 @@ jimport('joomla.filesystem.file');
 $this->_script = $this->_scripts = array();
 
 // check modules
-JHtml::_('behavior.framework', true);
+// JHtml::_('behavior.framework', true);
 
 // get params
 $app				= JFactory::getApplication();
@@ -60,6 +60,24 @@ endif;
 jQuery.noConflict();
 
 var BASE_URL = '<?php echo JURI::base(); ?>';
+
+jQuery(function($){
+	
+	  $('li.f-mainparent-item').hover(function () {
+	     clearTimeout($.data(this, 'timer'));
+	     $('ul', this).stop(true, true).slideDown(0);
+// 	     $('ul.menutop li').removeClass('active');
+// 	     $(this).addClass('active');
+	  }, function () {
+	    $.data(this, 'timer', setTimeout($.proxy(function() {
+	      $('ul', this).stop(true, true).slideUp(0);
+// 	      $('ul.menutop li').removeClass('active');
+// 	      $('ul.menutop').find('li.current_active').addClass('active');
+	      
+	    }, this), 200));
+	  });
+	});
+
 //-->
 </script>
 
@@ -98,7 +116,7 @@ var BASE_URL = '<?php echo JURI::base(); ?>';
 					<div class="nopill">
 						<div class="rt-menubar">
 							<ul class="menutop level1 ">
-								<li class="item101 active root firstItem"><a
+								<li class="item101 active current_active root firstItem"><a
 									class="orphan item bullet"
 									href="http://livedemo00.template-help.com/joomla_40404/"
 									id="a-1382344374540159"> <span> Home </span>
@@ -109,10 +127,19 @@ var BASE_URL = '<?php echo JURI::base(); ?>';
 											About </span>
 								</a>
 								</li>
-								<li class="item118 parent root f-main-parent f-mainparent-item">
+								<li class="item118 parent root f-main-parent f-mainparent-item relative">
 									<span class="daddy item bullet nolink"
-									id="span-1382344374542206"> <span> Services </span>
+									id="span-1382344374542206"> <span> Danh mục </span>
 								</span>
+								
+									<ul class='show-category absolute'>
+										<li>
+											Test
+										</li>
+										<li>
+											Test 1
+										</li>
+									</ul>
 
 
 								</li>
@@ -135,7 +162,7 @@ var BASE_URL = '<?php echo JURI::base(); ?>';
 		</div>
 	</div>
 
-	<?php if ($this->countModules('featured-banner')): ?>
+	<?php if ($this->countModules('kfeatured-banner')): ?>
 	<div id="rt-showcase">
 		<div class="showcase">
 			<div class="rt-container homepage">

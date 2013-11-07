@@ -62,6 +62,10 @@ width: 940px;
 width: 620px;
 }
 
+#rt-header .rt-container .rt-grid-8 {
+width: 625px !important;
+}
+
 .rt-container .rt-grid-6 {
 width: 460px;
 }

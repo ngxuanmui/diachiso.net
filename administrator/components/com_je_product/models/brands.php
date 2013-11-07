@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: Brands.php 20267 2011-01-11 03:44:44Z eddieajau $
+ * @version		$Id: Brands.php $
  * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -119,6 +119,13 @@ class JE_ProductModelBrands extends JModelList
 		
 		// filter by category id
 		$categoryId = $this->getState('filter.category_id');
+		
+		/* if filter when select brand while input product */
+		$requestCatId = JRequest::getInt('category_id', 0);
+		
+		if ($requestCatId)
+			$categoryId = $requestCatId;
+		/* end filter request category id */
 		
 		if ($categoryId)
 		{

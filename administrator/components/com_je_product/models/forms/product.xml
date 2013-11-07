@@ -68,10 +68,10 @@
 			addfieldpath="/administrator/components/com_je_content/models/fields"
 		/>
 			
-		<field name="featured_content" type="editor" class="inputbox" height="350"
+		<field name="featured_content" type="editor" class="inputbox" height="415"
 			rows="3" cols="30" label="Featured" filter="safehtml" buttons="false" />
 			
-		<field name="tech_content" type="editor" class="inputbox" height="350"
+		<field name="tech_content" type="editor" class="inputbox" height="415"
 			rows="3" cols="30" label="Tech Content" filter="safehtml" buttons="false" />
 
 		<!-- field name="content" type="editor" class="inputbox"

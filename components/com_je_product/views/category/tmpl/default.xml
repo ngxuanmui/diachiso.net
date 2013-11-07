@@ -17,9 +17,6 @@
 			>
 				<option value="0">Tất cả danh mục</option>
 			</field>
-
-			<field name="info_id" type="info" class="inputbox" size="1" label="Info"
-				addfieldpath="/administrator/components/com_je_product/models/fields" />
 		</fieldset>
 	</fields>
 </metadata>

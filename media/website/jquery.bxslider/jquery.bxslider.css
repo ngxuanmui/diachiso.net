@@ -36,6 +36,7 @@
 	border: solid #fff 5px;
 	left: -5px;
 	background: #fff;
+	z-index: 0;
 }
 
 .bx-wrapper .bx-pager,
