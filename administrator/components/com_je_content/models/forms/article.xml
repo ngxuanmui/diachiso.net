@@ -16,27 +16,39 @@
 			<option value="">- Select Category -</option>
 		</field>
 
-		<field name="title" type="text" size="45"
+		<field name="title" type="text" size="47"
 			label="COM_JE_CONTENT_FIELD_TITLE_LABEL" 
 			description ="COM_JE_CONTENT_FIELD_TITLE_DESC" 
 			required="true"  />
 
-		<field name="alias" type="text" size="45"
+		<field name="alias" type="text" size="85"
 			label="COM_JE_CONTENT_FIELD_ALIAS_LABEL" 
 			description ="COM_JE_CONTENT_FIELD_ALIAS_DESC" 
 			 />
+			 
+		<field name="shortdesc" type="textarea" class="inputbox"
+			rows="2" cols="25" label="Short Desc" />
 
 		<field name="introtext" type="editor"
 			label="COM_JE_CONTENT_FIELD_INTROTEXT_LABEL" 
 			description ="COM_JE_CONTENT_FIELD_INTROTEXT_DESC" 
-			filter="JComponentHelper::filterText" buttons="true"
+			filter="JComponentHelper::filterText" buttons="false"
 			 />
 
 		<field name="fulltext" type="editor"
 			label="COM_JE_CONTENT_FIELD_FULLTEXT_LABEL" 
 			description ="COM_JE_CONTENT_FIELD_FULLTEXT_DESC" 
-			filter="JComponentHelper::filterText" buttons="true"
+			filter="JComponentHelper::filterText" buttons="false"
 			 />
+			 
+		<field name="related_brand_id" type="modal_brand"
+			label="Related Brand" />
+			
+		<field name="link_to_product" type="checkbox"
+			label="Link to product?" value="1" default="0" />
+			
+		<field name="product_id" type="modal_product"
+			label="Product" />
 
 		<field name="images" type="file" label="Thumb Image" />
 		<field name="del_image" type="checkbox" value="1" />

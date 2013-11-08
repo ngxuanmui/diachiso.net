@@ -25,6 +25,13 @@ JHtml::_('behavior.formvalidation');
 	}
 </script>
 
+<style>
+<!--
+.button2-left { margin-top: 5px; }
+#jform_title, #jform_alias, #jform_shortdesc { width: 400px; }
+-->
+</style>
+
 <form action="<?php echo JRoute::_('index.php?option=com_je_content&layout=edit&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="article-form" class="form-validate" enctype="multipart/form-data">
 	<div class="width-60 fltlft">
 		<fieldset class="adminform">
@@ -36,6 +43,9 @@ JHtml::_('behavior.formvalidation');
 				
 				<li><?php echo $this->form->getLabel('alias'); ?>
 				<?php echo $this->form->getInput('alias'); ?></li>
+				
+				<li><?php echo $this->form->getLabel('shortdesc'); ?>
+				<?php echo $this->form->getInput('shortdesc'); ?></li>
 				
 				<li><?php echo $this->form->getLabel('catid'); ?>
 				<?php echo $this->form->getInput('catid'); ?></li>
@@ -70,14 +80,20 @@ JHtml::_('behavior.formvalidation');
 				</li>
 				<?php endif; ?>
 				
-				<li><?php echo $this->form->getLabel('featured'); ?>
-				<?php echo $this->form->getInput('featured'); ?></li>
+				<li><?php echo $this->form->getLabel('related_brand_id'); ?>
+				<?php echo $this->form->getInput('related_brand_id'); ?></li>
+				
+				<li><?php echo $this->form->getLabel('link_to_product'); ?>
+				<?php echo $this->form->getInput('link_to_product'); ?></li>
+				
+				<li><?php echo $this->form->getLabel('product_id'); ?>
+				<?php echo $this->form->getInput('product_id'); ?></li>
 				
 				<li><?php echo $this->form->getLabel('state'); ?>
 				<?php echo $this->form->getInput('state'); ?></li>
 				
-				<li><?php echo $this->form->getLabel('language'); ?>
-				<?php echo $this->form->getInput('language'); ?></li>
+				<li><?php echo $this->form->getLabel('featured'); ?>
+				<?php echo $this->form->getInput('featured'); ?></li>
 
 				<li><?php echo $this->form->getLabel('id'); ?>
 				<?php echo $this->form->getInput('id'); ?></li>

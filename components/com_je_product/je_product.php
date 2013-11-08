@@ -18,10 +18,8 @@ define('THUMB_WIDTH', 400);
 define('NEW_THUMB_WIDTH', 50);
 
 require_once JPATH_COMPONENT.'/helpers/route.php';
-jimport('joomla.application.component.controller');
 
-// add cart helper
-require_once JPATH_ROOT . DS . 'jelibs' . DS . 'classes' . DS . 'shopping_basket.class.php';
+jimport('joomla.application.component.controller');
 
 $controller = JController::getInstance('JE_Product');
 $controller->execute(JRequest::getCmd('task'));

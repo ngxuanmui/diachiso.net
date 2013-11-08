@@ -240,9 +240,9 @@ ul.menu-user li a {
 }
 
 /* Dropdown Surrounds */
-.menutop ul {
-	width: 938px !important;
-	padding: 4px 5px;
+.menutop ul.show-category {
+	width: 888px !important;
+	padding: 10px 30px;
 	margin: 0px;
 	float: left;
 	border-top: 1px solid #d1d1d1;
@@ -268,6 +268,10 @@ ul.menu-user li a {
 	/* Opera 11.10+ */
 	background-image: linear-gradient(to bottom, #fbfbfb, #e3e3e3);
 }
+
+.menutop ul.show-category > li { font-weight: bold; width: 25%; float: left; }
+
+.menutop ul.show-category ul li { margin-left: 20px; font-weight: normal; padding: 5px 0; }
 
 .menutop .drop-bot {
 	height: 1px;
