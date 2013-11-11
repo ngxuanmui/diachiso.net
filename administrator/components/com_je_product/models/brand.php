@@ -189,18 +189,23 @@ class JE_ProductModelBrand extends JModelAdmin
 		$subBrandsId = $jinput->post->get('sub_brand_id', array(), 'array');
 		
 		// delete all sub brands before re-insert sub brands
-		$query = "DELETE FROM #__je_sub_brands WHERE brand_id = '$brandId' AND id NOT IN (".(implode(',', $subBrandsId)).")";
-		$db->setQuery($query);
-		
-		$db->query();
-		
-		if($db->getErrorMsg())
+		if (!empty ($subBrandsId))
 		{
-			die('Error: '.$query);
+			$query = "DELETE FROM #__je_sub_brands WHERE brand_id = '$brandId' AND id NOT IN (".(implode(',', $subBrandsId)).")";
+			$db->setQuery($query);
+			
+			$db->query();
+			
+			if($db->getErrorMsg())
+			{
+				die('Error: '.$query);
+			}
 		}
 		
 		$subBrandsTitle = $jinput->post->get('sub_brand_title', array(), 'array');
 		$subBrandsDesc = $jinput->post->get('sub_brand_desc', array(), 'array');
+		$subBrandsSlogan = $jinput->post->get('sub_brand_slogan', array(), 'array');
+		$subBrandsWebsite = $jinput->post->get('sub_brand_website', array(), 'array');
 		$subBrandsLogoUploaded = $jinput->post->get('sub_brand_logo_uploaded', array(), 'array');
 		$files = $jinput->files->get('jform');
 		
@@ -228,7 +233,9 @@ class JE_ProductModelBrand extends JModelAdmin
 		{
 			if ($title != '')
 			{
-				$desc = $subBrandsDesc[$key];
+				$desc 		= $subBrandsDesc[$key];
+				$slogan 	= $subBrandsSlogan[$key];
+				$website 	= $subBrandsWebsite[$key];
 				
 				$image = '';
 				
@@ -268,9 +275,11 @@ class JE_ProductModelBrand extends JModelAdmin
 				}
 				
 				$query .= "	brand_id 	= '$brandId', 
-							title 		= '$title', 
+							title 		= ".$db->quote($title).", 
 							description = ".$db->quote($desc).", 
-							logo 		= '$image'
+							slogan 		= ".$db->quote($slogan).", 
+							website		= ".$db->quote($website).", 
+							logo 		= ".$db->quote($image)."
 						";
 				
 				if (isset($subBrandsId[$key]))

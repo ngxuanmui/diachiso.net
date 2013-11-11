@@ -49,8 +49,13 @@ class JFormFieldSubBrand extends JFormFieldList
 		
 		$html = array();
 		
+		$html[] = '<div>';
+		
+		$html[] = '		<button type="button" class="add-sub-brand">Add sub brand</button>';
+		
+		$html[] = '</div>';
+		
 		$html[] = '<div id="sub-brand">';
-		$html[] = '		<button type="button" id="add-sub-brand">Add sub brand</button>';
 		
 		foreach ($rs as $subBrand)
 		{
@@ -70,7 +75,9 @@ class JFormFieldSubBrand extends JFormFieldList
 			$html[] = '			</div>';		
 			$html[] = '			<ul>';
 			$html[] = '				<li><span>Title :</span> <input type="text" name="sub_brand_title[]" value="'.$subBrand->title.'" /></li>';		
-			$html[] = '				<li><span>Desc :</span> <textarea name="sub_brand_desc[]">'.$subBrand->description.'</textarea></li>';		
+			$html[] = '				<li><span>Desc :</span> <textarea name="sub_brand_desc[]">'.$subBrand->description.'</textarea></li>';
+			$html[] = '				<li><span>Slogan :</span> <input type="text" name="sub_brand_slogan[]" value="'.$subBrand->slogan.'" /></li>';		
+			$html[] = '				<li><span>Website :</span> <textarea name="sub_brand_website[]">'.$subBrand->website.'</textarea></li>';		
 			$html[] = '				<li><span>File :</span> <input type="file" name="jform[sub_brand_logo][]" /></li>';	
 			$html[] = '			</ul>';		
 			$html[] = '		</div>';
@@ -83,10 +90,18 @@ class JFormFieldSubBrand extends JFormFieldList
 		$html[] = '			<ul>';
 		$html[] = '				<li><span>Title :</span> <input type="text" name="sub_brand_title[]" /></li>';
 		$html[] = '				<li><span>Desc :</span> <textarea name="sub_brand_desc[]"></textarea></li>';
+		$html[] = '				<li><span>Slogan :</span> <input type="text" name="sub_brand_slogan[]" /></li>';
+		$html[] = '				<li><span>Website :</span> <textarea name="sub_brand_website[]"></textarea></li>';
 		$html[] = '				<li><span>File :</span> <input type="file" name="jform[sub_brand_logo][]" /></li>';
 		$html[] = '			</ul>';
 		$html[] = '		</div>';
 			
+		$html[] = '</div>';
+		
+		$html[] = '<div>';
+		
+		$html[] = '		<button type="button" class="add-sub-brand">Add sub brand</button>';
+		
 		$html[] = '</div>';
 		
 		$strHtml = implode("\r\n", $html);
@@ -105,7 +120,7 @@ class JFormFieldSubBrand extends JFormFieldList
 #list-sub-brand-tmpl { display: none; }
 #sub-brand { float: left; border: 0px solid #CCC; padding: 0; }
 .sub-brand-tmpl { clear: both; display-none; margin-bottom: 10px; float: left; border-bottom: 0px solid #CCC; padding-bottom: 10px; }
-.sub-brand-tmpl span { float: left; line-height: 23px; width: 40px; }
+.sub-brand-tmpl span { float: left; line-height: 23px; width: 50px; }
 .sub-brand-tmpl input { width: 200px !important; }
 .sub-brand-tmpl textarea { width: 196px !important; }
 .sub-brand-tmpl ul { float: left; width: 300px; }
@@ -118,7 +133,7 @@ class JFormFieldSubBrand extends JFormFieldList
 <script type="text/javascript">
 <!--
 window.addEvent('domready', function(){
-	$('add-sub-brand').addEvent('click', function(){
+	$$('.add-sub-brand').addEvent('click', function(){
 		var html = $('list-sub-brand-tmpl').get('html');
 
 		var myElement  = new Element('div', {'html': html, 'class': 'sub-brand-tmpl'});
