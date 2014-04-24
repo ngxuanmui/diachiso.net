@@ -59,28 +59,29 @@ class JE_ProductModelCategory extends JModelList
 		$query->select($this->getState('list.select', 'DISTINCT a.id, a.*') . ', c.title AS category_title, '
 		. ' CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(\':\', a.id, a.alias) ELSE a.id END as slug, '
 		. ' CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(\':\', c.id, c.alias) ELSE c.id END AS catslug ');
-		$query->from('`#__je_products` AS a');
-		$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
+		$query->from('`#__je_brands` AS a');
+		
+		// join over brand category
+		$query->join('LEFT', '#__je_brand_category bc ON bc.brand_id = a.id');
+		
+		$query->join('LEFT', '#__categories AS c ON c.id = bc.category_id');
 		
 		// Filter by category.		
 		$categoryId = JRequest::getVar('id', null);
 		
 		if ($categoryId) {
-			$query->where('a.catid IN (select c.id from #__categories c, (select * from #__categories where id = '.(int) $categoryId.') as viewa where c.extension = "com_je_product" AND (c.id = '.(int) $categoryId.' OR (c.lft > viewa.lft AND c.rgt < viewa.rgt)))');
+			$query->where('c.id IN (select c.id from #__categories c, (select * from #__categories where id = '.(int) $categoryId.') as viewa where c.extension = "com_je_product" AND (c.id = '.(int) $categoryId.' OR (c.lft > viewa.lft AND c.rgt < viewa.rgt)))');
 		}
 		
-		$infoId = JRequest::getInt('info_id');
+// 		$infoId = JRequest::getInt('info_id');
 		
-		if ($infoId)
-		{
-			$query->select('i.name AS manu_title');
-			$query->join('LEFT', '#__je_info i ON a.info_id = i.id');
-			$query->where('a.info_id = ' . (int) $infoId);
-		}
+// 		if ($infoId)
+// 		{
+// 			$query->select('i.name AS manu_title');
+// 			$query->join('LEFT', '#__je_info i ON a.info_id = i.id');
+// 			$query->where('a.info_id = ' . (int) $infoId);
+// 		}
 		
-		$session = JFactory::getSession();
-		$location = $session->get('location', null);
-
 		// Filter by state
 		$query->where('a.state = 1');
 		
@@ -97,6 +98,8 @@ class JE_ProductModelCategory extends JModelList
 
 		// Add the list ordering clause.
 		$query->order('a.sticky, a.id DESC');
+		
+// 		echo $query->dump();
 
 		//echo str_replace('#__', 'jos_', $query); //die;
 

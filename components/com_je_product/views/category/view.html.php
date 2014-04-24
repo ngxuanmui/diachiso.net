@@ -31,8 +31,8 @@ class JE_ProductViewCategory extends JView
 		$this->pagination = $this->get('Pagination');
 		$this->category= $this->get('CategoryInfo');
 		
-		if(!$this->items)
-			return;
+		//if(!$this->items)
+			//return;
 		
 //		$this->_prepareDocument();
 

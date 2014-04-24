@@ -473,7 +473,7 @@ a.moduleItemImage img {
 }
 
 #rt-maintop .rt-block {
-	padding: 40px 0 54px;
+	/* padding: 40px 0 54px; */
 }
 
 .ui-tabs {
@@ -879,7 +879,7 @@ div.k2ItemsBlock.jcarousel ul#jcarousel li div.moduleItemIntrotext a.moduleItemT
 }
 
 #rt-main .rt-container {
-	padding: 60px 0 10px;
+	/* padding: 60px 0 10px; */
 }
 
 div.catItemIntroText {
@@ -953,3 +953,65 @@ ul.social li a:hover {
 .rt-omega { margin-right: 0 !important; }
 .f-mainparent-item span { cursor: pointer; }
 /* ###################### */
+
+.sortbytype {
+width: 100%;
+overflow: hidden;
+padding: 0px 0 0px;
+}
+
+.sortbytype a {
+float: right;
+padding: 0;
+margin: 0 3px 0 10px;
+text-decoration: none;
+font: bold 11px/24px arial;
+color: #aeaeae;
+text-transform: uppercase;
+}
+
+a.active_sort {
+color: #333;
+}
+
+
+#breadcrumbs { margin: 10px 0; }
+
+.overflow {
+overflow: hidden;
+}
+
+div.catItemHeader, h2.k2ProfileHeading, div.userItemHeader, div.module-title, div.genericItemHeader, div.itemHeader, h1.contentTitle, h3.itemCommentsCounter, div.itemCommentsForm h3 {
+margin: 0 0 18px 0;
+}
+
+div.catItemHeader h3.catItemTitle, div.userItemHeader h3.userItemTitle, div.module-title h2.title, div.itemHeader h2.itemTitle, div.itemCommentsForm h3, h3.itemCommentsCounter, h1.contentTitle, div.componentheading h2, h2.k2ProfileHeading, div.genericItemHeader h2.genericItemTitle {
+font: 18px/24px 'Anton', sans-serif;
+padding: 0;
+margin: 0;
+font-weight: normal;
+letter-spacing: normal;
+color: #535353;
+text-transform: uppercase;
+filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=hIEfix.png,sizingMethod=crop);
+}
+
+div.catItemIntroText {
+font-size: inherit;
+font-weight: normal;
+line-height: inherit;
+padding: 0px;
+margin: 0 20px 0 0;
+}
+
+#port div.itemContainer .catItemBody {
+margin-bottom: 10px;
+}
+div.catItemBody {
+margin: 0;
+padding: 0;
+}
+
+.size_235 {
+width: 235px;
+}
